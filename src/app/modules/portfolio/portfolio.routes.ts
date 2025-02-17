@@ -6,7 +6,7 @@ import { PortfolioItemValidation } from './portfolio.validation'
 const portfolioRouter = Router()
 
 portfolioRouter.post(
-  '/auth/register',
+  '/create-portfolio',
   zodValidator(PortfolioItemValidation.PortfolioItemSchema),
   portfolioControlloer.createPortfolioItem
 )
