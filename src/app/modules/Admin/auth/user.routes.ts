@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { userControlloer } from './user.controller'
-import zodValidator from '../../middleware/validator'
+import zodValidator from '../../../middleware/validator'
 import { authValidation } from './user.validation'
-import auth from '../../middleware/auth'
+import auth from '../../../middleware/auth'
 
 const userRouter = Router()
 

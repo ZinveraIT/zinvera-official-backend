@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { blogControllers } from './blog.controller'
-import { BlogValidation } from './blog.validation'
+import { blogControllers } from './services.controller'
+import { BlogValidation } from './services.validation'
 import zodValidator from '../../middleware/validator'
 import auth from '../../middleware/auth'
 

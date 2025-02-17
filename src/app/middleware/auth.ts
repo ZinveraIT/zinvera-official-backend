@@ -3,7 +3,7 @@ import catchAsync from '../utils/catchAsync'
 import AppError from '../error/AppError'
 import config from '../config'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { user } from '../modules/auth/user.model'
+import { user } from '../modules/Admin/auth/user.model'
 
 const auth = (...requiredRole: string[]) => {
   // console.log('auth middleware triggered ')

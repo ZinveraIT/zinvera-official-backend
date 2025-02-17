@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import IBlog from './blog.interface'
+import IBlog from './services.interface'
 
 const blogSchema = new Schema<IBlog>(
   {

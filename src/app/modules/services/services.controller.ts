@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
-import { blogServices } from './blog.services'
+import { blogServices } from './services.services'
 import sendResponse from '../../utils/sendResponse'
 
 const createBlog = catchAsync(async (req: Request, res: Response) => {
