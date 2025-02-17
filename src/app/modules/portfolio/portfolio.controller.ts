@@ -13,7 +13,17 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const getAllPortfolio = catchAsync(async (req: Request, res: Response) => {
+  const result = await portfolioServcies.getAllPortfolioIntroDB()
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: 'portfolio inserted  successfull',
+    data: result,
+  })
+})
 
 export const portfolioControlloer = {
   createPortfolioItem,
+  getAllPortfolio,
 }

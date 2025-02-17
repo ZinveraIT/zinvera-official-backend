@@ -10,6 +10,7 @@ portfolioRouter.post(
   zodValidator(PortfolioItemValidation.PortfolioItemSchema),
   portfolioControlloer.createPortfolioItem
 )
+portfolioRouter.get('/get-portfolio', portfolioControlloer.getAllPortfolio)
 
 // /api/admin/users/:userId/block
 
