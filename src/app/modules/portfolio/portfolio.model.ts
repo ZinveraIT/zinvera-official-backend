@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
-import { PortfolioItem } from './portfolio.interface'
+import { IPortfolio } from './portfolio.interface'
 
-const portfolioItemSchema = new Schema<PortfolioItem>(
+const portfolioItemSchema = new Schema<IPortfolio>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -13,7 +13,7 @@ const portfolioItemSchema = new Schema<PortfolioItem>(
 ) // timestamps will automatically add createdAt and updatedAt fields
 
 // Create and export the model based on the schema
-const PortfolioItemModel = mongoose.model<PortfolioItem>(
+const PortfolioItemModel = mongoose.model<IPortfolio>(
   'PortfolioItem',
   portfolioItemSchema
 )

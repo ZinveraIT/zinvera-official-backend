@@ -1,4 +1,4 @@
-export interface PortfolioItem {
+export interface IPortfolio {
   title: string
   description: string
   imageUrl: string[]
