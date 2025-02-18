@@ -1,10 +1,8 @@
-import { Types } from 'mongoose'
-
-interface IBlog {
+interface IService {
   title: string
-  content: string
-  author: Types.ObjectId
-  isPublished?: boolean
+  shortDescription: string
+  keyFeatured: string[]
+  longDescription?: boolean
 }
 
-export default IBlog
+export default IService

@@ -1,20 +1,20 @@
 import { model, Schema } from 'mongoose'
-import IBlog from './services.interface'
+import IService from './services.interface'
 
-const blogSchema = new Schema<IBlog>(
+const serviceSchema = new Schema<IService>(
   {
     title: {
       type: String,
       required: [true, 'blog title is required '],
       trim: true,
     },
-    content: {
+    shortDescription: {
       type: String,
       required: [true, 'blog content is required'],
       trim: true,
     },
-    author: { type: Schema.Types.ObjectId, ref: 'user' },
-    isPublished: { type: Boolean, default: true },
+    keyFeatured: { type: [String] },
+    longDescription: { type: String },
   },
   {
     timestamps: true,
@@ -22,4 +22,4 @@ const blogSchema = new Schema<IBlog>(
   }
 )
 
-export const blog = model<IBlog>('blog', blogSchema)
+export const service = model<IService>('service', serviceSchema)
