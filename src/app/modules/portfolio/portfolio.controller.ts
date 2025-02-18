@@ -24,8 +24,20 @@ const deletePortfolioItem = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const getAllSinglePortfolio = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await portfolioServcies.getAllPortfolioIntroDB()
+    sendResponse(res, {
+      statusCode: 201,
+      success: true,
+      message: 'portfolio retrivied  successfull',
+      data: result,
+    })
+  }
+)
 const getAllPortfolio = catchAsync(async (req: Request, res: Response) => {
-  const result = await portfolioServcies.getAllPortfolioIntroDB()
+  const id = req.params.id
+  const result = await portfolioServcies.getSinglePortfolioIntroDB(id)
   sendResponse(res, {
     statusCode: 201,
     success: true,
@@ -38,4 +50,5 @@ export const portfolioControlloer = {
   createPortfolioItem,
   getAllPortfolio,
   deletePortfolioItem,
+  getAllSinglePortfolio,
 }

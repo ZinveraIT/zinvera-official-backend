@@ -16,8 +16,15 @@ const deletePortfolioIntroDB = async (id: string) => {
   )
   return result
 }
+const getSinglePortfolioIntroDB = async (id: string) => {
+  const result = await PortfolioItem.findById(id)
+  if (result?.isDeleted) {
+    throw new Error('Portfolio not found')
+  }
+  return result
+}
 const getAllPortfolioIntroDB = async () => {
-  const result = await PortfolioItem.find({ isDeleted: false })
+  const result = await PortfolioItem.find()
   return result
 }
 
@@ -25,4 +32,5 @@ export const portfolioServcies = {
   createPortfolioItemIntroDB,
   getAllPortfolioIntroDB,
   deletePortfolioIntroDB,
+  getSinglePortfolioIntroDB,
 }

@@ -10,9 +10,13 @@ portfolioRouter.post(
   zodValidator(PortfolioItemValidation.PortfolioItemSchema),
   portfolioControlloer.createPortfolioItem
 )
-portfolioRouter.patch(
+portfolioRouter.delete(
   '/delete-portfolio/:id',
   portfolioControlloer.deletePortfolioItem
+)
+portfolioRouter.get(
+  '/get-portfolio/:id',
+  portfolioControlloer.getAllSinglePortfolio
 )
 portfolioRouter.get('/get-portfolio', portfolioControlloer.getAllPortfolio)
 
