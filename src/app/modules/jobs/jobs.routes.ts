@@ -1,25 +1,19 @@
 import { Router } from 'express'
 import zodValidator from '../../middleware/validator'
-import { portfolioControlloer } from './jobs.controller'
-import { PortfolioItemValidation } from './jobs.validation'
+import { jobValidationSchema } from './jobs.validation'
+import { JobControlloer } from './jobs.controller'
 
-const portfolioRouter = Router()
+const JobRouter = Router()
 
-portfolioRouter.post(
-  '/create-portfolio',
-  zodValidator(PortfolioItemValidation.PortfolioItemSchema),
-  portfolioControlloer.createPortfolioItem
+JobRouter.post(
+  '/create-Job',
+  zodValidator(jobValidationSchema),
+  JobControlloer.createJob
 )
-portfolioRouter.delete(
-  '/delete-portfolio/:id',
-  portfolioControlloer.deletePortfolioItem
-)
-portfolioRouter.get(
-  '/get-portfolio/:id',
-  portfolioControlloer.getSinglePortfolio
-)
-portfolioRouter.get('/get-portfolio', portfolioControlloer.getAllPortfolio)
+JobRouter.delete('/delete-Job/:id', JobControlloer.deleteJOb)
+JobRouter.get('/get-Job/:id', JobControlloer.getSingleJob)
+JobRouter.get('/get-Job', JobControlloer.getAllJob)
 
 // /api/admin/users/:userId/block
 
-export default portfolioRouter
+export default JobRouter
