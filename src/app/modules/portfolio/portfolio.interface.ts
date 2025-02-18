@@ -4,4 +4,6 @@ export interface IPortfolio {
   imageUrl: string[]
   liveLink: string
   tags: string[]
+  isDeleted?: boolean
 }
+ 

@@ -8,14 +8,15 @@ const portfolioItemSchema = new Schema<IPortfolio>(
     imageUrl: { type: [String], required: true },
     liveLink: { type: String, required: true },
     tags: { type: [String], required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }
 ) // timestamps will automatically add createdAt and updatedAt fields
 
 // Create and export the model based on the schema
-const PortfolioItemModel = mongoose.model<IPortfolio>(
+const PortfolioItem = mongoose.model<IPortfolio>(
   'PortfolioItem',
   portfolioItemSchema
 )
 
-export default PortfolioItemModel
+export default PortfolioItem
