@@ -1,5 +1,5 @@
-import { IPortfolio } from './portfolio.interface'
-import PortfolioItem from './portfolio.model'
+import { IPortfolio } from './jobs.interface'
+import PortfolioItem from './jobs.model'
 
 const createPortfolioItemIntroDB = async (payload: IPortfolio) => {
   const result = await PortfolioItem.create(payload)

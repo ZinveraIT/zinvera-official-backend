@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import zodValidator from '../../middleware/validator'
-import { portfolioControlloer } from './portfolio.controller'
-import { PortfolioItemValidation } from './portfolio.validation'
+import { portfolioControlloer } from './jobs.controller'
+import { PortfolioItemValidation } from './jobs.validation'
 
 const portfolioRouter = Router()
 

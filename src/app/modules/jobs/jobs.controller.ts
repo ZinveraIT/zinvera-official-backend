@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
-import { portfolioServcies } from './portfolio.service'
+import { portfolioServcies } from './jobs.service'
 
 const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body
