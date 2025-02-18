@@ -1,48 +1,43 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
-import { blogServices } from './services.services'
 import sendResponse from '../../utils/sendResponse'
+import { zinveraServices } from './services.services'
 
-const createBlog = catchAsync(async (req: Request, res: Response) => {
-  const extractedToken = req.headers.authorization
-  const token = (extractedToken as string).split(' ')[1]
-  const blogData = req.body
-  const result = await blogServices.createBlogIntroDB(blogData, token)
+const createService = catchAsync(async (req: Request, res: Response) => {
+  const serviceData = req.body
+  const result = await zinveraServices.createServiceIntroDB(serviceData)
   sendResponse(res, {
     success: true,
-    message: 'Blog created successfully',
+    message: 'Service created successfully',
     statusCode: 201,
     data: result,
   })
 })
-const updateBlog = catchAsync(async (req: Request, res: Response) => {
-  const extractedToken = req.headers.authorization
-  const token = (extractedToken as string).split(' ')[1]
+const updateService = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
   const blogData = req.body
-  const result = await blogServices.updateBlogIntroDB(id, blogData, token)
+  const result = await zinveraServices.updateServiceIntroDB(id, blogData)
   sendResponse(res, {
     success: true,
-    message: 'Blog updated successfully',
+    message: 'service updated successfully',
     statusCode: 200,
     data: result,
   })
 })
-const deleteBlog = catchAsync(async (req: Request, res: Response) => {
+const deleteService = catchAsync(async (req: Request, res: Response) => {
   const extractedToken = req.headers.authorization
   const token = (extractedToken as string).split(' ')[1]
   const id = req.params.id
-  const result = await blogServices.deleteBlogIntroDB(id, token)
+  const result = await zinveraServices.deleteServiceIntroDB(id)
   sendResponse(res, {
     success: true,
     message: 'Blog deleted successfully',
     statusCode: 200,
   })
 })
-const getAllBlog = catchAsync(async (req: Request, res: Response) => {
-  // console.log(req.query)
-  const result = await blogServices.getAllBlogIntroDB(req.query)
+const getAllService = catchAsync(async (req: Request, res: Response) => {
+  const result = await zinveraServices.getAllServiceIntroDB()
   sendResponse(res, {
     success: true,
     message: 'Blogs fetched successfully',
@@ -51,9 +46,9 @@ const getAllBlog = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-export const blogControllers = {
-  createBlog,
-  updateBlog,
-  deleteBlog,
-  getAllBlog,
+export const servicesControllers = {
+  createService,
+  updateService,
+  deleteService,
+  getAllService,
 }

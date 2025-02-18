@@ -1,17 +1,26 @@
 import { Router } from 'express'
-import { blogControllers } from './services.controller'
+import { servicesControllers } from './services.controller'
 import { BlogValidation } from './services.validation'
 import zodValidator from '../../middleware/validator'
+import auth from '../../middleware/auth'
 
 const serviceRouter = Router()
+serviceRouter.patch(
+  '/:id',
+  auth('admin'),
+  zodValidator(BlogValidation.blogUpdateValidation),
+  servicesControllers.updateService
+)
+serviceRouter.delete('/:id', auth('admin'), servicesControllers.deleteService)
 
 serviceRouter.post(
   '/',
+  auth('admin'),
   zodValidator(BlogValidation.blogCreateValidation),
-  blogControllers.createBlog
+  servicesControllers.createService
 )
 
-serviceRouter.get('/', blogControllers.getAllBlog)
+serviceRouter.get('/', servicesControllers.getAllService)
 
 export default serviceRouter
 ///api/blogs/:id
