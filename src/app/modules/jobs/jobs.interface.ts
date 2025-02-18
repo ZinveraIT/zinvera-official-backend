@@ -5,4 +5,5 @@ export interface IJob {
   location: string
   employmentType: 'Full-time' | 'Part-time' | 'Contract' | 'Internship'
   salary?: string
+  isDeleted?: boolean
 }

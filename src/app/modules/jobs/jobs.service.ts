@@ -1,13 +1,12 @@
-import { IPortfolio } from './jobs.interface'
-import PortfolioItem from './jobs.model'
+import { IJob } from './jobs.interface'
+import JobModel from './jobs.model'
 
-const createPortfolioItemIntroDB = async (payload: IPortfolio) => {
-  const result = await PortfolioItem.create(payload)
+const createJobIntroDB = async (payload: IJob) => {
+  const result = await JobModel.create(payload)
   return result
 }
-const deletePortfolioIntroDB = async (id: string) => {
-  console.log(id)
-  const result = await PortfolioItem.findByIdAndUpdate(
+const deletejobIntoDB = async (id: string) => {
+  const result = await JobModel.findByIdAndUpdate(
     id,
     {
       isDeleted: true,
@@ -16,21 +15,31 @@ const deletePortfolioIntroDB = async (id: string) => {
   )
   return result
 }
-const getSinglePortfolioIntroDB = async (id: string) => {
-  const result = await PortfolioItem.findById(id)
+const updatejobIntoDB = async (id: string, updateData: Partial<IJob>) => {
+  const result = await JobModel.findByIdAndUpdate(
+    id,
+    { $set: updateData }, // শুধু নির্দিষ্ট ফিল্ড আপডেট করবে
+    { new: true, runValidators: true } // নতুন ডাটা রিটার্ন করবে এবং ভ্যালিডেশন চেক করবে
+  )
+
+  return result
+}
+const getSinglejobIntoDB = async (id: string) => {
+  const result = await JobModel.findById(id)
   if (result?.isDeleted) {
     throw new Error('Portfolio not found')
   }
   return result
 }
-const getAllPortfolioIntroDB = async () => {
-  const result = await PortfolioItem.find({ isDeleted: false })
+const getAlljobIntoDB = async () => {
+  const result = await JobModel.find({ isDeleted: false })
   return result
 }
 
-export const portfolioServcies = {
-  createPortfolioItemIntroDB,
-  getAllPortfolioIntroDB,
-  deletePortfolioIntroDB,
-  getSinglePortfolioIntroDB,
+export const JobServcies = {
+  createJobIntroDB,
+  getAlljobIntoDB,
+  deletejobIntoDB,
+  getSinglejobIntoDB,
+  updatejobIntoDB,
 }

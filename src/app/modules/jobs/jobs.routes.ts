@@ -11,6 +11,7 @@ JobRouter.post(
   JobControlloer.createJob
 )
 JobRouter.delete('/delete-Job/:id', JobControlloer.deleteJOb)
+JobRouter.patch('/update-Job/:id', JobControlloer.updateJob)
 JobRouter.get('/get-Job/:id', JobControlloer.getSingleJob)
 JobRouter.get('/get-Job', JobControlloer.getAllJob)
 

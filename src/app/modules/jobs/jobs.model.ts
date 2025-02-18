@@ -29,6 +29,10 @@ const jobSchema = new Schema<IJob>(
       type: String,
       default: 'Negotiable',
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, versionKey: false }
 ) // timestamps will automatically add createdAt and updatedAt fields
