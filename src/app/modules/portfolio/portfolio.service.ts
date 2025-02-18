@@ -16,6 +16,17 @@ const deletePortfolioIntroDB = async (id: string) => {
   )
   return result
 }
+const updatePortfolioIntroDB = async (
+  id: string,
+  payload: Partial<IPortfolio>
+) => {
+  const result = await PortfolioItem.findByIdAndUpdate(
+    id,
+    { $set: payload }, // শুধুমাত্র নির্দিষ্ট ফিল্ড আপডেট হবে
+    { new: true, runValidators: true } // নতুন ডাটা রিটার্ন করবে এবং ভ্যালিডেশন চেক করবে
+  )
+  return result
+}
 const getSinglePortfolioIntroDB = async (id: string) => {
   const result = await PortfolioItem.findById(id)
   if (result?.isDeleted) {
@@ -33,4 +44,5 @@ export const portfolioServcies = {
   getAllPortfolioIntroDB,
   deletePortfolioIntroDB,
   getSinglePortfolioIntroDB,
+  updatePortfolioIntroDB,
 }

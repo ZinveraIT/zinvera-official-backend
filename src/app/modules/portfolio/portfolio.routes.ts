@@ -14,6 +14,10 @@ portfolioRouter.delete(
   '/delete-portfolio/:id',
   portfolioControlloer.deletePortfolioItem
 )
+portfolioRouter.patch(
+  '/update-portfolio/:id',
+  portfolioControlloer.updatePortfolioItem
+)
 portfolioRouter.get(
   '/get-portfolio/:id',
   portfolioControlloer.getSinglePortfolio

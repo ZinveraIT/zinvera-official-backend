@@ -24,6 +24,18 @@ const deletePortfolioItem = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const updatePortfolioItem = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const payload = req.body
+  // console.log(id)
+  const result = await portfolioServcies.updatePortfolioIntroDB(id, payload)
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: 'portfolio update  successfull',
+    data: result,
+  })
+})
 const getAllPortfolio = catchAsync(async (req: Request, res: Response) => {
   const result = await portfolioServcies.getAllPortfolioIntroDB()
   sendResponse(res, {
@@ -49,4 +61,5 @@ export const portfolioControlloer = {
   getAllPortfolio,
   deletePortfolioItem,
   getSinglePortfolio,
+  updatePortfolioItem,
 }
