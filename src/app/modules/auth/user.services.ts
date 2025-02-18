@@ -1,5 +1,5 @@
-import config from '../../../config'
-import AppError from '../../../error/AppError'
+import config from '../../config'
+import AppError from '../../error/AppError'
 import IUser, { IloginUser } from './user.interface'
 import { user } from './user.model'
 import bcrypt from 'bcrypt'

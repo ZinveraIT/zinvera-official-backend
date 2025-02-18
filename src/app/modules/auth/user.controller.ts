@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from 'express'
-import catchAsync from '../../../utils/catchAsync'
+import catchAsync from '../../utils/catchAsync'
 import { userServcies } from './user.services'
-import sendResponse from '../../../utils/sendResponse'
+import sendResponse from '../../utils/sendResponse'
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import userRouter from '../modules/Admin/auth/user.routes'
+import userRouter from '../modules/auth/user.routes'
 import portfolioRouter from '../modules/portfolio/portfolio.routes'
 
 const router = Router()
