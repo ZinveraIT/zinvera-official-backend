@@ -3,7 +3,7 @@ interface IUser {
   email: string
   picture?: string // Optional field
   password: string
-  role: 'admin' | 'user'
+  role?: 'user'
   isBlocked?: boolean
   isDeleted?: boolean
 }

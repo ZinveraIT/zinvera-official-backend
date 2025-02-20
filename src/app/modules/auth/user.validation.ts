@@ -13,7 +13,7 @@ const userValidationSchema = z.object({
   password: z.string({
     required_error: 'Password is required',
   }),
-  role: z.enum(['admin', 'user']).default('user'),
+  role: z.string().default('user'),
   isBlocked: z.boolean().default(false),
   isDeleted: z.boolean().default(false),
 })
