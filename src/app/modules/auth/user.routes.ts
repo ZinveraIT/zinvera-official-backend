@@ -3,16 +3,14 @@ import { userControlloer } from './user.controller'
 import zodValidator from '../../middleware/validator'
 import { authValidation } from './user.validation'
 import auth from '../../middleware/auth'
-
-import multer from 'multer'
-const upload = multer({ dest: 'uploads/' })
+import upload from '../../utils/sendImageCloudinary'
 
 const userRouter = Router()
 
 userRouter.post(
   '/auth/register',
-  zodValidator(authValidation.userValidationSchema),
-  upload.single('picture'),
+  // zodValidator(authValidation.userValidationSchema),
+  upload.single('file'),
   userControlloer.createUser
 )
 userRouter.post(
