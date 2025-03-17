@@ -14,6 +14,7 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
     const { secure_url } = (await cloudinaryImage(imageName, path)) as {
       secure_url: string
     }
+    // console.log('image secure url', secure_url)
     data.picture = secure_url
   }
   const result = await userServcies.createUserIntroDB(data)
@@ -35,6 +36,15 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const getAllUsers = catchAsync(async (req: Request, res: Response) => {
+  const result = await userServcies.getAllUsersIntroDB()
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User retirived successfully',
+    data: result,
+  })
+})
 const blockUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.params.userId
   const result = await userServcies.blockUsersIntroDB(payload)
@@ -44,9 +54,20 @@ const blockUser = catchAsync(async (req: Request, res: Response) => {
     message: 'User blocked successfully',
   })
 })
+const deleteUser = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.params.userId
+  const result = await userServcies.deleteUserIntoDB(payload)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User deleted successfully',
+  })
+})
 
 export const userControlloer = {
   createUser,
   loginUser,
   blockUser,
+  getAllUsers,
+  deleteUser,
 }

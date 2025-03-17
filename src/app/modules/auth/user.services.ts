@@ -43,9 +43,33 @@ const loginUserIntroDB = async (payload: IloginUser) => {
   return { token }
 }
 
+const getAllUsersIntroDB = async () => {
+  const result = await user.find()
+  return result
+}
 const blockUsersIntroDB = async (id: string) => {
+  const isExist = await user.findById(id)
+  if (!isExist) {
+    throw new AppError(404, 'User not found')
+  }
+  if (isExist.isDeleted) {
+    throw new AppError(404, 'User already blocked')
+  }
   const result = await user.findByIdAndUpdate(id, {
     isBlocked: true,
+  })
+  return result
+}
+const deleteUserIntoDB = async (id: string) => {
+  const isExist = await user.findById(id)
+  if (!isExist) {
+    throw new AppError(404, 'User not found')
+  }
+  if (isExist.isDeleted) {
+    throw new AppError(404, 'User already deleted')
+  }
+  const result = await user.findByIdAndUpdate(id, {
+    isDeleted: true,
   })
   return result
 }
@@ -54,4 +78,6 @@ export const userServcies = {
   createUserIntroDB,
   loginUserIntroDB,
   blockUsersIntroDB,
+  getAllUsersIntroDB,
+  deleteUserIntoDB,
 }
