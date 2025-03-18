@@ -63,6 +63,17 @@ const deleteUser = catchAsync(async (req: Request, res: Response) => {
     message: 'User deleted successfully',
   })
 })
+const updateuser = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.params.userId
+  const data = req?.body
+  console.log(data)
+  const result = await userServcies.updateUserInfoIntoDB(payload, data)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User deleted successfully',
+  })
+})
 
 export const userControlloer = {
   createUser,
@@ -70,4 +81,5 @@ export const userControlloer = {
   blockUser,
   getAllUsers,
   deleteUser,
+  updateuser,
 }

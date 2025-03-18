@@ -29,7 +29,7 @@ userRouter.patch(
   auth('admin'),
   userControlloer.blockUser
 )
-userRouter.patch('/user/:userId', auth('user'), userControlloer.blockUser)
+userRouter.patch('/user/:userId', auth('user'), userControlloer.updateuser)
 
 // /api/admin/users/:userId/block
 

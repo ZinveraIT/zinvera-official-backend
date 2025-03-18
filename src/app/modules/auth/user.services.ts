@@ -73,6 +73,22 @@ const deleteUserIntoDB = async (id: string) => {
   })
   return result
 }
+const updateUserInfoIntoDB = async (id: string, payload: Partial<IUser>) => {
+  const isExist = await user.findById(id)
+  if (!isExist) {
+    throw new AppError(404, 'user not found')
+  }
+  if (isExist.isDeleted) {
+    throw new AppError(404, 'unAuthorized user already deleted')
+  }
+  const result = await user.updateOne(
+    { _id: id },
+    {
+      $set: payload,
+    }
+  )
+  return result
+}
 
 export const userServcies = {
   createUserIntroDB,
@@ -80,4 +96,5 @@ export const userServcies = {
   blockUsersIntroDB,
   getAllUsersIntroDB,
   deleteUserIntoDB,
+  updateUserInfoIntoDB,
 }

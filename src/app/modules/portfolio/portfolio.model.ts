@@ -1,11 +1,11 @@
 import mongoose, { Schema } from 'mongoose'
-import { IPortfolio } from './portfolio.interface'
+import { IPortfolio, ITeam } from './portfolio.interface'
 
 const portfolioItemSchema = new Schema<IPortfolio>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    imageUrl: { type: [String], required: true },
+    image: { type: String, required: true },
     liveLink: { type: String, required: true },
     tags: { type: [String], required: true },
     isDeleted: { type: Boolean, default: false },
