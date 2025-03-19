@@ -10,11 +10,11 @@ const userValidationSchema = z.object({
         required_error: 'Email is required',
       })
       .email('Invalid email address'),
-    picture: z.string().optional(), // Optional field
     password: z.string({
       required_error: 'Password is required',
     }),
     role: z.string().default('user'),
+    position: z.string().optional(), // Optional field
     isBlocked: z.boolean().default(false),
     isDeleted: z.boolean().default(false),
   }),

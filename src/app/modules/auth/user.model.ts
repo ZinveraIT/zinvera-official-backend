@@ -14,7 +14,7 @@ const userSchema = new Schema<IUser>(
       required: [true, 'Email is required'],
       unique: true,
     },
-    picture: {
+    image: {
       type: String,
       default: '', // Default empty string if no picture is provided
     },
@@ -27,6 +27,7 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: 'user',
     },
+    Position: { type: String, default: '' },
     isBlocked: {
       type: Boolean,
       default: false,

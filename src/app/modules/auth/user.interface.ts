@@ -1,9 +1,10 @@
 interface IUser {
   userName: string
   email: string
-  picture?: string // Optional field
+  image?: string // Optional field
   password: string
   role?: 'user'
+  Position?: string
   isBlocked?: boolean
   isDeleted?: boolean
 }
