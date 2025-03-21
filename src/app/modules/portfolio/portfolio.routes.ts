@@ -1,13 +1,15 @@
 import { Router } from 'express'
-import zodValidator from '../../middleware/validator'
+// import zodValidator from '../../middleware/validator'
 import { portfolioControlloer } from './portfolio.controller'
-import { PortfolioItemValidation } from './portfolio.validation'
+import { upload } from '../../utils/sendImageCloudinary'
+// import { PortfolioItemValidation } from './portfolio.validation'
 
 const portfolioRouter = Router()
 
 portfolioRouter.post(
   '/create-portfolio',
-  zodValidator(PortfolioItemValidation.PortfolioItemSchema),
+  // zodValidator(PortfolioItemValidation.PortfolioItemSchema),
+  upload,
   portfolioControlloer.createPortfolioItem
 )
 portfolioRouter.delete(

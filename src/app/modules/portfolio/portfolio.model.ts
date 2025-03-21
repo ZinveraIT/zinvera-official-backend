@@ -6,7 +6,7 @@ const portfolioItemSchema = new Schema<IPortfolio>(
     title: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true },
-    vedio: { type: String, required: true },
+    vedio: { type: String },
     keyFeatured: { type: [String], required: true },
     team: { type: [{ name: String, image: String }], required: true },
     techStack: { type: [String], required: true }, // Array of tech stacks

@@ -2,14 +2,50 @@ import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
 import { portfolioServcies } from './portfolio.service'
+import { uploadToCloudinary } from '../../utils/sendImageCloudinary'
 
 const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body
-  const result = await portfolioServcies.createPortfolioItemIntroDB(payload)
+  const data = JSON.parse(req.body.data)
+
+  if (!req.files) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'No files uploaded',
+    })
+  }
+
+  // Handle image upload
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
+  ) {
+    const imagePath = (
+      (req.files as { [fieldname: string]: Express.Multer.File[] })[
+        'image'
+      ][0] as Express.Multer.File
+    ).path
+    data.image = await uploadToCloudinary(imagePath, 'image')
+  }
+
+  // Handle video upload
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['video']
+  ) {
+    const videoPath = (
+      (req.files as { [fieldname: string]: Express.Multer.File[] })[
+        'video'
+      ][0] as Express.Multer.File
+    ).path
+    data.video = await uploadToCloudinary(videoPath, 'video')
+  }
+
+  const result = await portfolioServcies.createPortfolioItemIntroDB(data)
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: 'portfolio inserted  successfull',
+    message: 'Portfolio item created successfully',
     data: result,
   })
 })

@@ -12,4 +12,4 @@ const zodValidator = (schema: AnyZodObject) => {
   }
 }
 
-export default zodValidator
+export default zodValidator 

@@ -3,19 +3,21 @@ import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
 import { userServcies } from './user.services'
 import sendResponse from '../../utils/sendResponse'
-import { cloudinaryImage } from '../../utils/sendImageCloudinary'
+import { uploadToCloudinary } from '../../utils/sendImageCloudinary'
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   // const payload = req.body
   const data = JSON.parse(req.body.data)
-  if (req.file) {
-    const imageName = 'roton'
-    const path = req.file?.path
-    const { secure_url } = (await cloudinaryImage(imageName, path)) as {
-      secure_url: string
-    }
-    // console.log('image secure url', secure_url)
-    data.picture = secure_url
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
+  ) {
+    const imagePath = (
+      (req.files as { [fieldname: string]: Express.Multer.File[] })[
+        'image'
+      ][0] as Express.Multer.File
+    ).path
+    data.image = await uploadToCloudinary(imagePath, 'image')
   }
   const result = await userServcies.createUserIntroDB(data)
   sendResponse(res, {
