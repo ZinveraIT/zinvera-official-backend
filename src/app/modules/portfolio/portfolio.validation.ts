@@ -1,14 +1,25 @@
 import { z } from 'zod'
 
-// Define the Zod schema for PortfolioItem
-export const PortfolioItemSchema = z.object({
-  title: z.string().min(1, 'Title is required'), // Title must be a non-empty string
-  description: z.string().min(1, 'Description is required'), // Description must be a non-empty string
-  imageUrl: z
-    .array(z.string().url())
-    .min(1, 'At least one image URL is required'), // Image URLs must be an array of valid URLs
-  liveLink: z.string().url('Live link must be a valid URL'), // Live link must be a valid URL
-  tags: z.array(z.string()).min(1, 'At least one tag is required'), // Tags must be an array of strings with at least one element
+// Define the Zod schema for portfolioItem
+const PortfolioItemSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().min(1, 'Description is required'),
+  keyFeatured: z
+    .array(z.string())
+    .min(1, 'At least one key feature is required'),
+  team: z
+    .array(
+      z.object({
+        name: z.string().min(1, 'Team member name is required'),
+        image: z.string().min(1, 'Team member image URL is required'),
+      })
+    )
+    .min(1, 'At least one team member is required'),
+  techStack: z.array(z.string()).min(1, 'At least one tech stack is required'),
+  tags: z.array(z.string()).min(1, 'At least one tag is required'),
+  isDeleted: z.boolean().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
 })
 
 // Type inference from the schema

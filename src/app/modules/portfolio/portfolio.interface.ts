@@ -6,10 +6,25 @@ export type ITeam = {
 export interface IPortfolio {
   title: string
   image: string
-  team: ITeam[]
+  vedio: string
   description: string
   keyFeatured: string[]
-  liveLink: string
+  team: ITeam[]
+  techStack: string[]
   tags: string[]
   isDeleted?: boolean
 }
+
+/* 
+Project Name
+Project Image
+Project vedio
+Project Team ( Add new team members dynamically)
+Name
+Image
+Project Description
+Project key featured - array
+tech Stack - array 
+Hash Tag - array 
+
+*/

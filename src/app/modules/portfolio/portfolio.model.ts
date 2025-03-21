@@ -1,12 +1,15 @@
 import mongoose, { Schema } from 'mongoose'
-import { IPortfolio, ITeam } from './portfolio.interface'
+import { IPortfolio } from './portfolio.interface'
 
 const portfolioItemSchema = new Schema<IPortfolio>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true },
-    liveLink: { type: String, required: true },
+    vedio: { type: String, required: true },
+    keyFeatured: { type: [String], required: true },
+    team: { type: [{ name: String, image: String }], required: true },
+    techStack: { type: [String], required: true }, // Array of tech stacks
     tags: { type: [String], required: true },
     isDeleted: { type: Boolean, default: false },
   },
@@ -20,3 +23,17 @@ const PortfolioItem = mongoose.model<IPortfolio>(
 )
 
 export default PortfolioItem
+
+/*
+Project Name
+Project Image
+Project vedio
+Project Team ( Add new team members dynamically)
+Name
+Image
+Project Description
+Project key featured - array
+tech Stack - array 
+Hash Tag - array 
+
+*/
