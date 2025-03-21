@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
@@ -5,7 +6,23 @@ import { portfolioServcies } from './portfolio.service'
 import { uploadToCloudinary } from '../../utils/sendImageCloudinary'
 
 const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
-  const data = JSON.parse(req.body.data)
+  if (!req.body.data) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'Missing data field in the request body',
+    })
+  }
+  let data
+  try {
+    data = JSON.parse(req.body.data)
+  } catch (error) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'Invalid JSON format in data field',
+    })
+  }
 
   if (!req.files) {
     return sendResponse(res, {
@@ -21,10 +38,8 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
     (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
   ) {
     const imagePath = (
-      (req.files as { [fieldname: string]: Express.Multer.File[] })[
-        'image'
-      ][0] as Express.Multer.File
-    ).path
+      req.files as { [fieldname: string]: Express.Multer.File[] }
+    )['image'][0].path
     data.image = await uploadToCloudinary(imagePath, 'image')
   }
 
@@ -34,10 +49,8 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
     (req.files as { [fieldname: string]: Express.Multer.File[] })['video']
   ) {
     const videoPath = (
-      (req.files as { [fieldname: string]: Express.Multer.File[] })[
-        'video'
-      ][0] as Express.Multer.File
-    ).path
+      req.files as { [fieldname: string]: Express.Multer.File[] }
+    )['video'][0].path
     data.video = await uploadToCloudinary(videoPath, 'video')
   }
 

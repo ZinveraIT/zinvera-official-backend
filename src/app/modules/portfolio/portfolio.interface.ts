@@ -1,3 +1,5 @@
+import mongoose from 'mongoose'
+
 export type ITeam = {
   name: string
   image: string
@@ -6,12 +8,13 @@ export type ITeam = {
 export interface IPortfolio {
   title: string
   image: string
-  vedio: string
+  video: string
   description: string
   keyFeatured: string[]
   team: ITeam[]
   techStack: string[]
   tags: string[]
+  category: mongoose.Types.ObjectId
   isDeleted?: boolean
 }
 
