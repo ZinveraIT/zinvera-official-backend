@@ -16,6 +16,10 @@ const deleteJobIntoDB = async (id: string) => {
 }
 
 const updateJobIntoDB = async (id: string, updateData: Partial<IJob>) => {
+  const isExist = await JobModel.findById(id)
+  if (isExist?.isDeleted) {
+    throw new Error('Job not found')
+  }
   const result = await JobModel.findByIdAndUpdate(
     id,
     { $set: updateData },
