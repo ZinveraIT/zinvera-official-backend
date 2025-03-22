@@ -23,5 +23,10 @@ export const jobValidationSchema = z.object({
     .string()
     .min(2, 'Job location must be at least 2 characters long'),
   isAvailable: z.boolean().optional(),
-  submissionDate: z.date(),
+  submissionDate: z
+    .string()
+    .transform((val) => new Date(val))
+    .refine((date) => !isNaN(date.getTime()), {
+      message: 'Invalid date format',
+    }),
 })
