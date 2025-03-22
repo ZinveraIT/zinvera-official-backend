@@ -12,6 +12,18 @@ const jobSchema = new Schema<IJob>(
       type: String,
       required: [true, 'Job description is required'],
     },
+    keyFeatured: {
+      type: [String],
+      required: [true, 'Key features are required'],
+    },
+    experienceNeed: {
+      type: [String],
+      required: [true, 'Experience requirements are required'],
+    },
+    skills: {
+      type: [String],
+      required: [true, 'Skills are required'],
+    },
     companyName: {
       type: String,
       required: [true, 'Company name is required'],
@@ -22,22 +34,37 @@ const jobSchema = new Schema<IJob>(
     },
     employmentType: {
       type: String,
-      enum: ['Full-time', 'Part-time', 'Contract', 'Internship'],
+      enum: ['Full-time', 'Part-time', 'Internship'],
       required: [true, 'Employment type is required'],
     },
     salary: {
-      type: String,
+      type: Schema.Types.Mixed, // Supports both number and string
       default: 'Negotiable',
+    },
+    Vacancy: {
+      type: Number,
+      required: [true, 'Vacancy count is required'],
+    },
+    Location: {
+      type: String,
+      required: [true, 'Job location is required'],
+    },
+    status: {
+      type: Boolean,
+      default: true,
     },
     isDeleted: {
       type: Boolean,
       default: false,
     },
+    submissionDate: {
+      type: Date,
+      required: [true, 'Submission deadline is required'],
+    },
   },
   { timestamps: true, versionKey: false }
-) // timestamps will automatically add createdAt and updatedAt fields
+)
 
-// Create and export the model based on the schema
 const JobModel = mongoose.model<IJob>('JobModel', jobSchema)
 
 export default JobModel

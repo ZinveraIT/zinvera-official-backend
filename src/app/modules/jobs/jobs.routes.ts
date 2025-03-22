@@ -10,10 +10,10 @@ JobRouter.post(
   zodValidator(jobValidationSchema),
   JobControlloer.createJob
 )
-JobRouter.delete('/delete-Job/:id', JobControlloer.deleteJOb)
+JobRouter.delete('/delete-Job/:id', JobControlloer.deleteJob)
 JobRouter.patch('/update-Job/:id', JobControlloer.updateJob)
 JobRouter.get('/get-Job/:id', JobControlloer.getSingleJob)
-JobRouter.get('/get-Job', JobControlloer.getAllJob)
+JobRouter.get('/get-Job', JobControlloer.getAllJobs)
 
 // /api/admin/users/:userId/block
 

@@ -9,56 +9,59 @@ const createJob = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: 'Job inserted  successfull',
+    message: 'Job created successfully',
     data: result,
   })
 })
-const deleteJOb = catchAsync(async (req: Request, res: Response) => {
+
+const deleteJob = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
-  // console.log(id)
-  const result = await JobServcies.deletejobIntoDB(id)
+  const result = await JobServcies.deleteJobIntoDB(id)
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: 200,
     success: true,
-    message: 'job deleted  successfull',
+    message: 'Job deleted successfully',
     data: result,
   })
 })
+
 const updateJob = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
   const payload = req.body
-  const result = await JobServcies.updatejobIntoDB(id, payload)
+  const result = await JobServcies.updateJobIntoDB(id, payload)
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: 200,
     success: true,
-    message: 'job deleted  successfull',
+    message: 'Job updated successfully',
     data: result,
   })
 })
-const getAllJob = catchAsync(async (req: Request, res: Response) => {
-  const result = await JobServcies.getAlljobIntoDB()
+
+const getAllJobs = catchAsync(async (req: Request, res: Response) => {
+  const result = await JobServcies.getAllJobsIntoDB()
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: 200,
     success: true,
-    message: 'all job retrivied  successfull',
+    message: 'All jobs retrieved successfully',
     data: result,
   })
 })
+
 const getSingleJob = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
-  const result = await JobServcies.getSinglejobIntoDB(id)
+  const result = await JobServcies.getSingleJobIntoDB(id)
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: 200,
     success: true,
-    message: 'single job retrivied  successfull',
+    message: 'Single job retrieved successfully',
     data: result,
   })
 })
 
 export const JobControlloer = {
   createJob,
-  getAllJob,
-  deleteJOb,
-  getSingleJob,
+  deleteJob,
   updateJob,
+  getAllJobs,
+  getSingleJob,
 }
