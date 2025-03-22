@@ -9,6 +9,6 @@ const categorySchema = new Schema<TCategory>(
 ) // timestamps will automatically add createdAt and updatedAt fields
 
 // Create and export the model based on the schema
-const categoryModel = mongoose.model<TCategory>('category', categorySchema)
+const category = mongoose.model<TCategory>('category', categorySchema)
 
-export default categoryModel
+export default category

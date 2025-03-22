@@ -5,6 +5,7 @@ export const jobValidationSchema = z.object({
   description: z
     .string()
     .min(10, 'Description must be at least 10 characters long'),
+  category: z.string().min(2, 'Category is required'),
   keyFeatured: z
     .array(z.string())
     .min(1, 'At least one key feature is required'),

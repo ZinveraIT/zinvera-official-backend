@@ -1,5 +1,8 @@
+import { Schema } from 'mongoose'
+
 export interface IJob {
   title: string
+  category: Schema.Types.ObjectId
   description: string
   keyFeatured: string[]
   experienceNeed: string[]

@@ -2,7 +2,7 @@ import { Router } from 'express'
 import userRouter from '../modules/auth/user.routes'
 import portfolioRouter from '../modules/portfolio/portfolio.routes'
 import JobRouter from '../modules/jobs/jobs.routes'
-import categoryRoutes from '../modules/Categories/category.router'
+import { categoryRouter } from '../modules/Categories/categories.router'
 
 const router = Router()
 
@@ -20,8 +20,8 @@ const routers = [
     router: JobRouter,
   },
   {
-    path: '/',
-    router: categoryRoutes,
+    path: '/category',
+    router: categoryRouter,
   },
 ]
 

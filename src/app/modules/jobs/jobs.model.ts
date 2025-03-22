@@ -8,6 +8,11 @@ const jobSchema = new Schema<IJob>(
       required: [true, 'Job title is required'],
       trim: true,
     },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'category',
+      required: [true, 'Category is required'],
+    },
     description: {
       type: String,
       required: [true, 'Job description is required'],

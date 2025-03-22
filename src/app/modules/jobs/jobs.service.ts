@@ -1,7 +1,12 @@
+import category from '../Categories/categories.model'
 import { IJob } from './jobs.interface'
 import JobModel from './jobs.model'
 
 const createJobIntroDB = async (payload: IJob) => {
+  const isExist = await category.findById(payload.category)
+  if (!isExist) {
+    throw new Error('Category not found')
+  }
   const result = await JobModel.create(payload)
   return result
 }
@@ -29,7 +34,7 @@ const updateJobIntoDB = async (id: string, updateData: Partial<IJob>) => {
 }
 
 const getSingleJobIntoDB = async (id: string) => {
-  const result = await JobModel.findById(id)
+  const result = await JobModel.findById(id).populate('category')
   if (result?.isDeleted) {
     throw new Error('Job not found')
   }
@@ -37,7 +42,7 @@ const getSingleJobIntoDB = async (id: string) => {
 }
 
 const getAllJobsIntoDB = async () => {
-  const result = await JobModel.find({ isDeleted: false })
+  const result = await JobModel.find({ isDeleted: false }).populate('category')
   return result
 }
 
