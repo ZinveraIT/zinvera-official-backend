@@ -4,7 +4,10 @@ interface IUser {
   image?: string // Optional field
   password: string
   role?: 'user'
-  Position?: string
+  position?: string
+  phone?: string
+  location?: string
+  socialLinks?: string[]
   isBlocked?: boolean
   isDeleted?: boolean
 }

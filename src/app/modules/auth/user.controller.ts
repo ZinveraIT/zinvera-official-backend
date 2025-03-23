@@ -67,13 +67,28 @@ const deleteUser = catchAsync(async (req: Request, res: Response) => {
 })
 const updateuser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.params.userId
-  const data = req?.body
-  console.log(data)
+  let data
+  if (req.body?.data) {
+    data = JSON.parse(req.body.data)
+  }
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
+  ) {
+    const imagePath = (
+      (req.files as { [fieldname: string]: Express.Multer.File[] })[
+        'image'
+      ][0] as Express.Multer.File
+    ).path
+    data.image = await uploadToCloudinary(imagePath, 'image')
+  }
+  // console.log(data)
   const result = await userServcies.updateUserInfoIntoDB(payload, data)
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'User deleted successfully',
+    message: 'User update successfully',
+    data: result,
   })
 })
 

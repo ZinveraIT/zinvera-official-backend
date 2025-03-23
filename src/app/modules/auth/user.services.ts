@@ -73,7 +73,26 @@ const deleteUserIntoDB = async (id: string) => {
   })
   return result
 }
-const updateUserInfoIntoDB = async (id: string, payload: Partial<IUser>) => {
+const updateUserInfoIntoDB = async (
+  id: string,
+  payload: Pick<
+    IUser,
+    | 'userName'
+    | 'email'
+    | 'image'
+    | 'role'
+    | 'phone'
+    | 'position'
+    | 'location'
+    | 'password'
+    | 'socialLinks'
+    | 'isBlocked'
+    | 'isDeleted'
+  >
+) => {
+  if (payload?.email) {
+    throw new Error('Email cannot be updated')
+  }
   const isExist = await user.findById(id)
   if (!isExist) {
     throw new AppError(404, 'user not found')
@@ -81,12 +100,10 @@ const updateUserInfoIntoDB = async (id: string, payload: Partial<IUser>) => {
   if (isExist.isDeleted) {
     throw new AppError(404, 'unAuthorized user already deleted')
   }
-  const result = await user.updateOne(
-    { _id: id },
-    {
-      $set: payload,
-    }
-  )
+  const result = await user.findByIdAndUpdate(id, payload, {
+    new: true,
+    runvalidate: true,
+  })
   return result
 }
 

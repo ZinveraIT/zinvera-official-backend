@@ -27,7 +27,13 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: 'user',
     },
-    Position: { type: String, default: '' },
+    position: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    location: { type: String, default: '' },
+    socialLinks: {
+      type: [String],
+      default: [], // Default to an empty array if no social links are provided
+    },
     isBlocked: {
       type: Boolean,
       default: false,
