@@ -12,13 +12,6 @@ const createService = catchAsync(async (req: Request, res: Response) => {
       message: 'Missing data field in the request body',
     })
   }
-  if (!req.body.image) {
-    return sendResponse(res, {
-      statusCode: 400,
-      success: false,
-      message: 'No files uploaded',
-    })
-  }
   const data = JSON.parse(req.body.data)
   if (
     req.files &&
@@ -62,10 +55,25 @@ const getServiceById = catchAsync(async (req: Request, res: Response) => {
 })
 
 const updateService = catchAsync(async (req: Request, res: Response) => {
-  const result = await serviceServices.updateServiceInDB(
-    req.params.id,
-    req.body
-  )
+  let data
+  console.log(req.params.id, req.body)
+  if (req.body.data) {
+    data = JSON.parse(req.body.data)
+  }
+
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
+  ) {
+    const imagePath = (
+      (req.files as { [fieldname: string]: Express.Multer.File[] })[
+        'image'
+      ][0] as Express.Multer.File
+    ).path
+    data.image = await uploadToCloudinary(imagePath, 'image')
+  }
+
+  const result = await serviceServices.updateServiceInDB(req.params.id, data)
   sendResponse(res, {
     statusCode: 200,
     success: true,

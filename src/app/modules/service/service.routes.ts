@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { serviceController } from './service.controller'
-import zodValidator from '../../middleware/validator'
-import { serviceValidationSchema } from './service.validation'
+// import zodValidator from '../../middleware/validator'
+// import { serviceValidationSchema } from './service.validation'
 import { upload } from '../../utils/sendImageCloudinary'
 
 const serviceRouter = Router()
@@ -14,11 +14,7 @@ serviceRouter.post(
 )
 serviceRouter.get('/', serviceController.getAllServices)
 serviceRouter.get('/:id', serviceController.getServiceById)
-serviceRouter.put(
-  '/:id',
-  zodValidator(serviceValidationSchema),
-  serviceController.updateService
-)
+serviceRouter.put('/:id', upload, serviceController.updateService)
 serviceRouter.delete('/:id', serviceController.deleteService)
 
 export default serviceRouter

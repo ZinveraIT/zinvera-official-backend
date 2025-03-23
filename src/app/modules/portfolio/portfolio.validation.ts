@@ -3,6 +3,7 @@ import { z } from 'zod'
 // Define the Zod schema for portfolioItem
 const PortfolioItemSchema = z.object({
   title: z.string().min(1, 'Title is required'),
+  vedio: z.string().min(1, 'Video URL is required'),
   description: z.string().min(1, 'Description is required'),
   keyFeatured: z
     .array(z.string())

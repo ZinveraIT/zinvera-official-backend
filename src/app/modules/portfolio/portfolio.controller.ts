@@ -13,6 +13,7 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
       message: 'Missing data field in the request body',
     })
   }
+  console.log('first', req.body.data)
   let data
   try {
     data = JSON.parse(req.body.data)
@@ -43,16 +44,16 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
     data.image = await uploadToCloudinary(imagePath, 'image')
   }
 
-  // Handle video upload
-  if (
-    req.files &&
-    (req.files as { [fieldname: string]: Express.Multer.File[] })['video']
-  ) {
-    const videoPath = (
-      req.files as { [fieldname: string]: Express.Multer.File[] }
-    )['video'][0].path
-    data.video = await uploadToCloudinary(videoPath, 'video')
-  }
+  // // Handle video upload
+  // if (
+  //   req.files &&
+  //   (req.files as { [fieldname: string]: Express.Multer.File[] })['video']
+  // ) {
+  //   const videoPath = (
+  //     req.files as { [fieldname: string]: Express.Multer.File[] }
+  //   )['video'][0].path
+  //   data.video = await uploadToCloudinary(videoPath, 'video')
+  // }
 
   const result = await portfolioServcies.createPortfolioItemIntroDB(data)
   sendResponse(res, {
@@ -75,9 +76,22 @@ const deletePortfolioItem = catchAsync(async (req: Request, res: Response) => {
 })
 const updatePortfolioItem = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
-  const payload = req.body
+  let data
+  console.log('hello', req.body.data)
+  if (req.body.data) {
+    data = JSON.parse(req.body.data)
+  }
+  if (
+    req.files &&
+    (req.files as { [fieldname: string]: Express.Multer.File[] })['image']
+  ) {
+    const imagePath = (
+      req.files as { [fieldname: string]: Express.Multer.File[] }
+    )['image'][0].path
+    data.image = await uploadToCloudinary(imagePath, 'image')
+  }
   // console.log(id)
-  const result = await portfolioServcies.updatePortfolioIntroDB(id, payload)
+  const result = await portfolioServcies.updatePortfolioIntroDB(id, data)
   sendResponse(res, {
     statusCode: 201,
     success: true,

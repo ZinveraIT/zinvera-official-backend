@@ -18,6 +18,7 @@ portfolioRouter.delete(
 )
 portfolioRouter.patch(
   '/update-portfolio/:id',
+  upload,
   portfolioControlloer.updatePortfolioItem
 )
 portfolioRouter.get(
