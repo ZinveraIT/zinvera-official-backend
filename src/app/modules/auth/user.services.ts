@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import config from '../../config'
 import AppError from '../../error/AppError'
 import IUser, { IloginUser } from './user.interface'
-import { user } from './user.model'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { user } from './user.model'
 
 const createUserIntroDB = async (payload: IUser) => {
   const isExist = await user.findOne({ email: payload.email })
@@ -107,6 +109,37 @@ const updateUserInfoIntoDB = async (
   return result
 }
 
+const updatePasswordIntoDB = async (
+  id: string,
+  payload: { oldPassword: string; newPassword: string }
+) => {
+  const userData = await user.findById(id).select('+password')
+  if (!userData) {
+    throw new AppError(404, 'User not found')
+  }
+  let isMatch = false
+
+  try {
+    isMatch = await bcrypt.compare(payload.oldPassword, userData.password)
+  } catch (error: any) {
+    throw new AppError(500, error.message)
+  }
+  console.log(isMatch)
+  if (!isMatch) {
+    throw new AppError(401, 'Invalid credentials')
+  }
+  const hashedPassword = await bcrypt.hash(
+    payload.newPassword,
+    Number(config.BCRYPT_SALT)
+  )
+  const result = await user.findByIdAndUpdate(
+    id,
+    { password: hashedPassword },
+    { new: true }
+  )
+  return result
+}
+
 export const userServcies = {
   createUserIntroDB,
   loginUserIntroDB,
@@ -114,4 +147,5 @@ export const userServcies = {
   getAllUsersIntroDB,
   deleteUserIntoDB,
   updateUserInfoIntoDB,
+  updatePasswordIntoDB,
 }

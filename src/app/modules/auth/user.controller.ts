@@ -91,6 +91,17 @@ const updateuser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const updatePass = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.userId
+  const payload = req.body
+  const result = await userServcies.updatePasswordIntoDB(id, payload)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'password change  successfully',
+    data: result,
+  })
+})
 
 export const userControlloer = {
   createUser,
@@ -99,4 +110,5 @@ export const userControlloer = {
   getAllUsers,
   deleteUser,
   updateuser,
+  updatePass,
 }
