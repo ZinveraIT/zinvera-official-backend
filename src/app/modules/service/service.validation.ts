@@ -8,4 +8,5 @@ export const serviceValidationSchema = z.object({
     .array(z.string())
     .min(1, 'At least one key feature is required'),
   benifits: z.array(z.string()).min(1, 'At least one benefit is required'),
+  isDeleted: z.boolean().optional().default(false),
 })

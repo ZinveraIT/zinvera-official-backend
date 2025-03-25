@@ -7,8 +7,9 @@ const serviceschema = new Schema<IService>(
       type: String,
     },
     title: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       required: true,
+      ref: 'category',
     },
     description: {
       type: String,
@@ -21,6 +22,10 @@ const serviceschema = new Schema<IService>(
     benifits: {
       type: [String],
       required: true,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {

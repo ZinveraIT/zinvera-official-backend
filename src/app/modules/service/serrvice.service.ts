@@ -11,12 +11,12 @@ const createServiceInDB = async (payload: IService) => {
 }
 
 const getAllServicesFromDB = async () => {
-  const result = await service.find()
+  const result = await service.find().populate('title')
   return result
 }
 
 const getServiceByIdFromDB = async (id: string) => {
-  const result = await service.findById(id)
+  const result = await service.findById(id).populate('title')
   if (!result) {
     throw new Error('Service not found')
   }
@@ -32,7 +32,13 @@ const updateServiceInDB = async (id: string, updateData: Partial<IService>) => {
 }
 
 const deleteServiceFromDB = async (id: string) => {
-  const result = await service.findByIdAndDelete(id)
+  const result = await service.findByIdAndUpdate(
+    id,
+    {
+      isDeleted: true,
+    },
+    { new: true, runValidators: true }
+  )
   if (!result) {
     throw new Error('Service not found or delete failed')
   }
