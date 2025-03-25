@@ -13,7 +13,6 @@ const createPortfolioItem = catchAsync(async (req: Request, res: Response) => {
       message: 'Missing data field in the request body',
     })
   }
-  console.log('first', req.body.data)
   let data
   try {
     data = JSON.parse(req.body.data)
@@ -100,6 +99,8 @@ const updatePortfolioItem = catchAsync(async (req: Request, res: Response) => {
   })
 })
 const getAllPortfolio = catchAsync(async (req: Request, res: Response) => {
+  const searchTerm = req.query.searchTerm
+  console.log(searchTerm)
   const result = await portfolioServcies.getAllPortfolioIntroDB()
   sendResponse(res, {
     statusCode: 201,
