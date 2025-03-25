@@ -5,6 +5,7 @@ import JobRouter from '../modules/jobs/jobs.routes'
 import { categoryRouter } from '../modules/Categories/categories.router'
 import serviceRouter from '../modules/service/service.routes'
 import additionalRouter from '../modules/additional/additional.routes'
+import SubscriptionRouter from '../modules/subscription/subscription.routes'
 
 const router = Router()
 
@@ -32,6 +33,10 @@ const routers = [
   {
     path: '/additional',
     router: additionalRouter,
+  },
+  {
+    path: '/subscription',
+    router: SubscriptionRouter,
   },
 ]
 
