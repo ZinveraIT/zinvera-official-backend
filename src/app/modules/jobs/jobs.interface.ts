@@ -13,7 +13,7 @@ export interface IJob {
   salary: number | string
   Vacancy: number
   Location: string
-  status?: boolean
+  status?: 'pending' | 'completed'
   isDeleted?: boolean
   submissionDate: Date
 }

@@ -55,8 +55,11 @@ const jobSchema = new Schema<IJob>(
       required: [true, 'Job location is required'],
     },
     status: {
-      type: Boolean,
-      default: true,
+      type: String,
+      enum: {
+        values: ['completed', 'pending'],
+      },
+      default: 'pending',
     },
     isDeleted: {
       type: Boolean,
