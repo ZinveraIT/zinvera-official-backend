@@ -55,6 +55,42 @@ class QueryBuilder<T> {
 
     return this
   }
+
+  fields() {
+    const fields =
+      (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v'
+
+    this.modelQuery = this.modelQuery.select(fields)
+    return this
+  }
+  async countTotal() {
+    const totalQueries = this.modelQuery.getFilter()
+    const total = await this.modelQuery.model.countDocuments(totalQueries)
+    const page = Number(this?.query?.page) || 1
+    const limit = Number(this?.query?.limit) || 10
+    const totalPage = Math.ceil(total / limit)
+
+    return {
+      page,
+      limit,
+      total,
+      totalPage,
+    }
+  }
+
+  priceRange(minPrice?: number, maxPrice?: number) {
+    const priceFilter: Record<string, unknown> = {}
+    if (minPrice !== undefined) priceFilter.$gte = minPrice
+    if (maxPrice !== undefined) priceFilter.$lte = maxPrice
+
+    if (minPrice !== undefined || maxPrice !== undefined) {
+      this.modelQuery = this.modelQuery.find({
+        price: priceFilter,
+      } as FilterQuery<T>)
+    }
+
+    return this
+  }
 }
 
 export default QueryBuilder

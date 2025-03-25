@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from 'express'
 import catchAsync from '../../utils/catchAsync'
@@ -99,9 +100,9 @@ const updatePortfolioItem = catchAsync(async (req: Request, res: Response) => {
   })
 })
 const getAllPortfolio = catchAsync(async (req: Request, res: Response) => {
-  const searchTerm = req.query.searchTerm
+  const searchTerm = req.query as Record<string, any>
   console.log(searchTerm)
-  const result = await portfolioServcies.getAllPortfolioIntroDB()
+  const result = await portfolioServcies.getAllPortfolioIntroDB(searchTerm)
   sendResponse(res, {
     statusCode: 201,
     success: true,

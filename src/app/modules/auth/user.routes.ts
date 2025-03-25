@@ -18,7 +18,7 @@ userRouter.post(
   zodValidator(authValidation.loginUserVaidation),
   userControlloer.loginUser
 )
-userRouter.get('/admin/users', auth('admin'), userControlloer.getAllUsers)
+userRouter.get('/admin/users', userControlloer.getAllUsers) //auth('admin'),
 userRouter.delete(
   '/admin/users/:userId',
   auth('admin'),

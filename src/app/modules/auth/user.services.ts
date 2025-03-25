@@ -6,6 +6,7 @@ import IUser, { IloginUser } from './user.interface'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { user } from './user.model'
+import QueryBuilder from '../../builder/builder'
 
 const createUserIntroDB = async (payload: IUser) => {
   const isExist = await user.findOne({ email: payload.email })
@@ -45,8 +46,15 @@ const loginUserIntroDB = async (payload: IloginUser) => {
   return { token }
 }
 
-const getAllUsersIntroDB = async () => {
-  const result = await user.find()
+const getAllUsersIntroDB = async (queryParams: Record<string, unknown>) => {
+  // const result = await user.find()
+  // return result
+  const query = new QueryBuilder(user.find({ isDeleted: false }), queryParams)
+    .search(['userName', 'email'])
+    .filter()
+    .paginate()
+
+  const result = await query.modelQuery
   return result
 }
 const blockUsersIntroDB = async (id: string) => {

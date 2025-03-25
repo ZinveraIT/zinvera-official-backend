@@ -39,7 +39,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   })
 })
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const result = await userServcies.getAllUsersIntroDB()
+  const result = await userServcies.getAllUsersIntroDB(req.query)
   sendResponse(res, {
     statusCode: 200,
     success: true,

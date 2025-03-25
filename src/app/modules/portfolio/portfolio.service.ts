@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import QueryBuilder from '../../builder/builder'
 import { IPortfolio } from './portfolio.interface'
 import PortfolioItem from './portfolio.model'
 
@@ -34,8 +36,15 @@ const getSinglePortfolioIntroDB = async (id: string) => {
   }
   return result
 }
-const getAllPortfolioIntroDB = async () => {
-  const result = await PortfolioItem.find({ isDeleted: false })
+const getAllPortfolioIntroDB = async (queryParams: Record<string, any>) => {
+  const query = new QueryBuilder(
+    PortfolioItem.find({ isDeleted: false }),
+    queryParams
+  )
+    .search(['title', 'description'])
+    .paginate()
+
+  const result = await query.modelQuery
   return result
 }
 
