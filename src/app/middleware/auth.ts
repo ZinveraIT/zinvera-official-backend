@@ -10,7 +10,7 @@ const auth = (...requiredRole: string[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     // console.log('auth middleware inside ')
     const extractedToken = req.headers.authorization
-    const token = (extractedToken as string).split(' ')[1]
+    const token = extractedToken as string
 
     if (!token) {
       throw new AppError(400, 'You are not authorized to access')

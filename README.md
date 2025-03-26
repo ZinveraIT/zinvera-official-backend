@@ -1,4 +1,11 @@
-# Zinvera IT  Backend
+# Zinvera IT Backend
+
+`Production URL - https://zinvera.vercel.app/api/`
+
+# creadiantial
+
+admin = test.admin@gmail.com
+user = test.user@gmail.com
 
 # English Documentation
 

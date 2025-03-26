@@ -6,8 +6,6 @@ const catchAsync = (fn: RequestHandler) => {
   }
 }
 
-// retrun a reolse promise 
+// retrun a reolse promise
 
 export default catchAsync
-
-
