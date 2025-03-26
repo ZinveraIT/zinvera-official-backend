@@ -3,6 +3,9 @@ import { ISubsription } from './subscription.interface'
 import { subscriptionModel } from './subscription.model'
 
 const requsetIntoDBForSubsciption = async (payload: ISubsription) => {
+  //c57ae384bafe4fe3beb1d9ea35303ec4
+  // const Verifier = require('email-verifier')
+
   const isExist = await subscriptionModel.findOne({ email: payload.email })
   if (isExist) {
     throw new AppError(400, 'Email already exists')

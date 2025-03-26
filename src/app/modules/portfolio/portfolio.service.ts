@@ -44,7 +44,7 @@ const getAllPortfolioIntroDB = async (queryParams: Record<string, any>) => {
     .search(['title', 'description'])
     .paginate()
 
-  const result = await query.modelQuery
+  const result = await query.modelQuery.populate('category').populate('team')
   return result
 }
 

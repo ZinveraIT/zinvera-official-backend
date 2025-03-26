@@ -1,17 +1,12 @@
 import mongoose from 'mongoose'
 
-export type ITeam = {
-  name: string
-  image: string
-}
-
 export interface IPortfolio {
   title: string
   image: string
   video: string
   description: string
   keyFeatured: string[]
-  team: ITeam[]
+  team: mongoose.Types.ObjectId[]
   techStack: string[]
   tags: string[]
   category: mongoose.Types.ObjectId

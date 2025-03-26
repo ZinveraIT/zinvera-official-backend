@@ -51,7 +51,6 @@ const getAllUsersIntroDB = async (queryParams: Record<string, unknown>) => {
   // return result
   const query = new QueryBuilder(user.find({ isDeleted: false }), queryParams)
     .search(['userName', 'email'])
-    .filter()
     .paginate()
 
   const result = await query.modelQuery

@@ -8,7 +8,7 @@ const portfolioItemSchema = new Schema<IPortfolio>(
     image: { type: String, required: true },
     video: { type: String, required: true },
     keyFeatured: { type: [String], required: true },
-    team: { type: [{ name: String, image: String }], required: true },
+    team: { type: [mongoose.Types.ObjectId], ref: 'user' },
     techStack: { type: [String], required: true }, // Array of tech stacks
     tags: { type: [String], required: true },
     category: { type: Schema.Types.ObjectId, ref: 'category', required: true },
