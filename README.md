@@ -1,6 +1,6 @@
 # Zinvera IT Backend
 
-`Production URL - https://zinvera.vercel.app/api/`
+`Production URL -` = https://zinvera.vercel.app/api/
 
 # creadiantial
 
@@ -109,19 +109,19 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 
 ### Portfolio
 
-- `POST /api/create-portfolio` - Create portfolio (Admin)
-- `GET /api/get-portfolio` - Get all portfolios
-- `GET /api/get-portfolio/:id` - Get single portfolio
-- `PATCH /api/update-portfolio/:id` - Update portfolio (Admin)
-- `DELETE /api/delete-portfolio/:id` - Delete portfolio (Admin)
+- `POST /api/portfolio` - Create portfolio (Admin)
+- `GET /api/portfolio` - Get all portfolios
+- `GET /api/portfolio/:id` - Get single portfolio
+- `PATCH /api/portfolio/:id` - Update portfolio (Admin)
+- `DELETE /api/portfolio/:id` - Delete portfolio (Admin)
 
 ### Jobs
 
-- `POST /api/create-Job` - Create job posting (Admin)
-- `GET /api/get-Job` - Get all jobs
-- `GET /api/get-Job/:id` - Get single job
-- `PATCH /api/update-Job/:id` - Update job (Admin)
-- `DELETE /api/delete-Job/:id` - Delete job (Admin)
+- `POST /api/job` - Create job posting (Admin)
+- `GET /api/job` - Get all jobs
+- `GET /api/job/:id` - Get single job
+- `PATCH /api/job/:id` - Update job (Admin)
+- `DELETE /api/job/:id` - Delete job (Admin)
 
 ### Services
 

@@ -8,28 +8,25 @@ import auth from '../../middleware/auth'
 const portfolioRouter = Router()
 
 portfolioRouter.post(
-  '/create-portfolio',
+  '/',
   // zodValidator(PortfolioItemValidation.PortfolioItemSchema),
   upload,
   auth('admin'),
   portfolioControlloer.createPortfolioItem
 )
 portfolioRouter.delete(
-  '/delete-portfolio/:id',
+  '/:id',
   auth('admin'),
   portfolioControlloer.deletePortfolioItem
 )
 portfolioRouter.patch(
-  '/update-portfolio/:id',
+  '/:id',
   upload,
   auth('admin'),
   portfolioControlloer.updatePortfolioItem
 )
-portfolioRouter.get(
-  '/get-portfolio/:id',
-  portfolioControlloer.getSinglePortfolio
-)
-portfolioRouter.get('/get-portfolio', portfolioControlloer.getAllPortfolio)
+portfolioRouter.get('/:id', portfolioControlloer.getSinglePortfolio)
+portfolioRouter.get('/', portfolioControlloer.getAllPortfolio)
 
 // /api/admin/users/:userId/block
 

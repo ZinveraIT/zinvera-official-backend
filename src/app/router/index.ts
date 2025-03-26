@@ -15,11 +15,11 @@ const routers = [
     router: userRouter,
   },
   {
-    path: '/',
+    path: '/portfolio',
     router: portfolioRouter,
   },
   {
-    path: '/',
+    path: '/job',
     router: JobRouter,
   },
   {

@@ -7,15 +7,15 @@ import auth from '../../middleware/auth'
 const JobRouter = Router()
 
 JobRouter.post(
-  '/create-Job',
+  '/',
   zodValidator(jobValidationSchema),
   auth('admin'),
   JobControlloer.createJob
 )
-JobRouter.delete('/delete-Job/:id', auth('admin'), JobControlloer.deleteJob)
-JobRouter.patch('/update-Job/:id', auth('admin'), JobControlloer.updateJob)
-JobRouter.get('/get-Job/:id', JobControlloer.getSingleJob)
-JobRouter.get('/get-Job', JobControlloer.getAllJobs)
+JobRouter.delete('/:id', auth('admin'), JobControlloer.deleteJob)
+JobRouter.patch('/:id', auth('admin'), JobControlloer.updateJob)
+JobRouter.get('/:id', JobControlloer.getSingleJob)
+JobRouter.get('/', JobControlloer.getAllJobs)
 
 // /api/admin/users/:userId/block
 
