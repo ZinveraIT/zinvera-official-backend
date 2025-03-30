@@ -53,6 +53,16 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const validToken = catchAsync(async (req: Request, res: Response) => {
+  const token = req.cookies.token
+  const result = await userServcies.tokenValidation(token)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'token validation successfully',
+    data: result,
+  })
+})
 const blockUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.params.userId
   const result = await userServcies.blockUsersIntroDB(payload)
@@ -117,4 +127,5 @@ export const userControlloer = {
   deleteUser,
   updateuser,
   updatePass,
+  validToken,
 }

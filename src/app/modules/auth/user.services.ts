@@ -147,6 +147,18 @@ const updatePasswordIntoDB = async (
   return result
 }
 
+const tokenValidation = (token: string) => {
+  // console.log(token)
+  const secret = config.JWT_SECRET as string
+
+  try {
+    const decoded = jwt.verify(token, secret)
+    return decoded
+  } catch (error: any) {
+    throw new AppError(401, 'Invalid token')
+  }
+}
+
 export const userServcies = {
   createUserIntroDB,
   loginUserIntroDB,
@@ -155,4 +167,5 @@ export const userServcies = {
   deleteUserIntoDB,
   updateUserInfoIntoDB,
   updatePasswordIntoDB,
+  tokenValidation,
 }
