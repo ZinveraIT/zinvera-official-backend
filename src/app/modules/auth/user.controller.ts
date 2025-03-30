@@ -31,6 +31,12 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body
   const result = await userServcies.loginUserIntroDB(payload)
+  res.cookie('token', result.token, {
+    httpOnly: true, // Helps prevent XSS attacks
+    secure: true, // Only set cookies over HTTPS in production
+    maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+    sameSite: 'strict', // Mitigate CSRF attacks
+  })
   sendResponse(res, {
     statusCode: 200,
     success: true,
