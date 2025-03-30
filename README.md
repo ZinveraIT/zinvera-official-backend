@@ -94,7 +94,11 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 
 ## API Endpoints
 
-### Authentication
+### Token Validation - No need to send any data . they will give the token in your cookie
+
+- `POST /api/validToken` - validate the token
+
+- ### Authentication
 
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - User login
