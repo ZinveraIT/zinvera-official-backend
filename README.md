@@ -1,6 +1,6 @@
 # Zinvera IT Backend
 
-`Production URL -` = https://zinvera.vercel.app/api/
+`Production URL -` = https://[zinvera](https://zinvera.vercel.app/api/).vercel.app/api/
 
 # creadiantial
 

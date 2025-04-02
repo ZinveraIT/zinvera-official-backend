@@ -35,7 +35,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     httpOnly: true, // Helps prevent XSS attacks
     secure: true, // Only set cookies over HTTPS in production
     maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
-    sameSite: 'strict', // Mitigate CSRF attacks
+    sameSite: 'none', // Mitigate CSRF attacks
   })
   sendResponse(res, {
     statusCode: 200,
@@ -118,6 +118,20 @@ const updatePass = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const logout = catchAsync(async (req: Request, res: Response) => {
+  res.cookie('token', '', {
+    httpOnly: true, // Helps prevent XSS attacks
+    secure: true, // Only set cookies over HTTPS in production
+    maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+    sameSite: 'none', // Mitigate CSRF attacks
+  })
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'logout  successfully',
+  })
+})
 
 export const userControlloer = {
   createUser,
@@ -128,4 +142,5 @@ export const userControlloer = {
   updateuser,
   updatePass,
   validToken,
+  logout,
 }

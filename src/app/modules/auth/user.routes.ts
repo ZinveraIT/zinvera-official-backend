@@ -32,6 +32,7 @@ userRouter.patch(
 userRouter.patch('/user/:userId', upload, userControlloer.updateuser) //auth('user')
 userRouter.post('/validToken', userControlloer.validToken) //auth('user')
 userRouter.patch('/update-password/:userId', userControlloer.updatePass) //auth('user')
+userRouter.delete('/auth/logout', userControlloer.logout) //auth('user')
 
 // /api/admin/users/:userId/block
 

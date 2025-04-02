@@ -37,6 +37,15 @@ const loginUserIntroDB = async (payload: IloginUser) => {
   const VerifiedUser = {
     email: UserData.email,
     role: UserData.role,
+    userName: UserData.userName,
+    _id: UserData._id,
+    image: UserData.image,
+    position: UserData.position,
+    location: UserData.location,
+    phone: UserData.phone,
+    socialLinks: UserData.socialLinks,
+    isBlocked: UserData.isBlocked,
+    isDeleted: UserData.isDeleted,
   }
 
   const secret = config.JWT_SECRET as string
