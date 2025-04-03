@@ -71,10 +71,10 @@ const blockUsersIntroDB = async (id: string) => {
     throw new AppError(404, 'User not found')
   }
   if (isExist.isDeleted) {
-    throw new AppError(404, 'User already blocked')
+    throw new AppError(404, 'User already deleted')
   }
   const result = await user.findByIdAndUpdate(id, {
-    isBlocked: true,
+    isBlocked: !isExist.isBlocked,
   })
   return result
 }

@@ -64,12 +64,13 @@ const validToken = catchAsync(async (req: Request, res: Response) => {
   })
 })
 const blockUser = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.params.userId
-  const result = await userServcies.blockUsersIntroDB(payload)
+  const id = req.params.userId
+  const result = await userServcies.blockUsersIntroDB(id)
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: 'User blocked successfully',
+    data: result,
   })
 })
 const deleteUser = catchAsync(async (req: Request, res: Response) => {
