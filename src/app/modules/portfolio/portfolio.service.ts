@@ -24,13 +24,13 @@ const updatePortfolioIntroDB = async (
 ) => {
   const result = await PortfolioItem.findByIdAndUpdate(
     id,
-    { $set: payload }, // শুধুমাত্র নির্দিষ্ট ফিল্ড আপডেট হবে
-    { new: true, runValidators: true } // নতুন ডাটা রিটার্ন করবে এবং ভ্যালিডেশন চেক করবে
+    { $set: payload },
+    { new: true, runValidators: true } // 
   )
   return result
 }
 const getSinglePortfolioIntroDB = async (id: string) => {
-  const result = await PortfolioItem.findById(id)
+  const result = await PortfolioItem.findById(id).populate('team')
   if (result?.isDeleted) {
     throw new Error('Portfolio not found')
   }
@@ -43,6 +43,12 @@ const getAllPortfolioIntroDB = async (queryParams: Record<string, any>) => {
   )
     .search(['title', 'description'])
     .paginate()
+
+  const result = await query.modelQuery.populate('category').populate('team')
+  return result
+}
+const getPortfolioIntroDB = async (queryParams: Record<string, any>) => {
+
 
   const result = await query.modelQuery.populate('category').populate('team')
   return result
