@@ -7,6 +7,7 @@ interface IUser {
   position?: string
   phone?: string
   location?: string
+  jobType?: 'Full-time' | 'Part-time' | 'Internship'
   socialLinks?: string[]
   isBlocked?: boolean
   isDeleted?: boolean

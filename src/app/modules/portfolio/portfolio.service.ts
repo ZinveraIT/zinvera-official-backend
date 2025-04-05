@@ -25,7 +25,7 @@ const updatePortfolioIntroDB = async (
   const result = await PortfolioItem.findByIdAndUpdate(
     id,
     { $set: payload },
-    { new: true, runValidators: true } // 
+    { new: true, runValidators: true } //
   )
   return result
 }
@@ -39,16 +39,10 @@ const getSinglePortfolioIntroDB = async (id: string) => {
 const getAllPortfolioIntroDB = async (queryParams: Record<string, any>) => {
   const query = new QueryBuilder(
     PortfolioItem.find({ isDeleted: false }),
-    queryParams
+    queryParams 
   )
     .search(['title', 'description'])
     .paginate()
-
-  const result = await query.modelQuery.populate('category').populate('team')
-  return result
-}
-const getPortfolioIntroDB = async (queryParams: Record<string, any>) => {
-
 
   const result = await query.modelQuery.populate('category').populate('team')
   return result

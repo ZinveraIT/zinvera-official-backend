@@ -30,6 +30,10 @@ const userSchema = new Schema<IUser>(
     position: { type: String, default: '' },
     phone: { type: String, default: '' },
     location: { type: String, default: '' },
+    jobType: {
+      type: String,
+      enum: ['Full-time', 'Part-time', 'Internship'],
+    },
     socialLinks: {
       type: [String],
       default: [], // Default to an empty array if no social links are provided

@@ -50,10 +50,6 @@ const jobSchema = new Schema<IJob>(
       type: Number,
       required: [true, 'Vacancy count is required'],
     },
-    Location: {
-      type: String,
-      required: [true, 'Job location is required'],
-    },
     status: {
       type: String,
       enum: {
