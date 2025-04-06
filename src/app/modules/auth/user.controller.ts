@@ -133,6 +133,17 @@ const logout = catchAsync(async (req: Request, res: Response) => {
     message: 'logout  successfully',
   })
 })
+const forgotPass = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body
+  const result = await userServcies.forgotPassword(payload)
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'forgot password   successfully',
+    data: result,
+  })
+})
 
 export const userControlloer = {
   createUser,
@@ -144,4 +155,5 @@ export const userControlloer = {
   updatePass,
   validToken,
   logout,
+  forgotPass,
 }

@@ -167,6 +167,32 @@ const tokenValidation = (token: string) => {
     throw new AppError(401, 'Invalid token')
   }
 }
+const forgotPassword = async (payload: { email: string }) => {
+  const User = await user.findOne({ email: payload.email })
+  if (!User) {
+    throw new AppError(404, 'User not found')
+  }
+  if (User.isBlocked) {
+    throw new AppError(404, 'User is blocked')
+  }
+  if (User.isDeleted) {
+    throw new AppError(404, 'User is deleted')
+  }
+  const jwtPayload = {
+    email: User.email,
+    userName: User.userName,
+    _id: User._id,
+    role: User.role,
+  }
+  const token = jwt.sign(jwtPayload, config.JWT_SECRET as string, {
+    expiresIn: '1h',
+  })
+  const resetLink = `https://localhost:3000/?id=${User._id}&token=${token}`
+
+  await sendMail()
+
+  console.log(token, resetLink)
+}
 
 export const userServcies = {
   createUserIntroDB,
@@ -177,4 +203,5 @@ export const userServcies = {
   updateUserInfoIntoDB,
   updatePasswordIntoDB,
   tokenValidation,
+  forgotPassword,
 }

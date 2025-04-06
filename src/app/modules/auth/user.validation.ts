@@ -29,4 +29,14 @@ const loginUserVaidation = z.object({
   }),
 })
 
-export const authValidation = { userValidationSchema, loginUserVaidation }
+const forgotPasswordValidation = z.object({
+  email: z
+    .string({ invalid_type_error: 'email is required ' })
+    .email('Invalid email address'),
+})
+
+export const authValidation = {
+  userValidationSchema,
+  loginUserVaidation,
+  forgotPasswordValidation,
+}
