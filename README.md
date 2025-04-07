@@ -110,6 +110,8 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - `PATCH /api/admin/users/:userId` - Block/Unblock user (Admin)
 - `PATCH /api/user/:userId` - Update user profile
 - `PATCH /api/update-password/:userId` - Update password
+- `POST /api/forgot-password` - forgot password
+- `PATCH /api/reset-password/67f356eabfd701197376f19e` - reset password
 
 ### Portfolio
 
