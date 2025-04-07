@@ -188,7 +188,7 @@ const forgotPassword = async (payload: { email: string }) => {
   const token = jwt.sign(jwtPayload, config.JWT_SECRET as string, {
     expiresIn: '1h',
   })
-  const resetLink = `https://localhost:3000/?id=${User._id}&token=${token}`
+  const resetLink = `http://localhost:3000/resetPassword/?id=${User._id}&token=${token}`
 
   await sendMail(User.email, resetLink)
   return {}
