@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { user } from './user.model'
 import QueryBuilder from '../../builder/builder'
+import sendMail from '../../utils/sendMail'
 
 const createUserIntroDB = async (payload: IUser) => {
   const isExist = await user.findOne({ email: payload.email })
@@ -189,9 +190,45 @@ const forgotPassword = async (payload: { email: string }) => {
   })
   const resetLink = `https://localhost:3000/?id=${User._id}&token=${token}`
 
-  await sendMail()
+  await sendMail(User.email, resetLink)
+  return {}
 
-  console.log(token, resetLink)
+  // console.log(token, resetLink)
+}
+
+const resetPass = async (
+  userId: string,
+  payload: { password: string; token: string }
+) => {
+  const userData = await user.findById(userId).select('+password')
+  if (!userData) {
+    throw new AppError(404, 'User not found')
+  }
+  if (userData.isBlocked) {
+    throw new AppError(404, 'User is blocked')
+  }
+  if (userData.isDeleted) {
+    throw new AppError(404, 'User is deleted')
+  }
+  const secret = config.JWT_SECRET as string
+
+  try {
+    const decoded = jwt.verify(payload.token, secret)
+    console.log(decoded)
+  } catch (error: any) {
+    throw new AppError(401, ' token time out', error)
+  }
+
+  const hashedPassword = await bcrypt.hash(
+    payload.password,
+    Number(config.BCRYPT_SALT)
+  )
+  const result = await user.findByIdAndUpdate(
+    userId,
+    { password: hashedPassword },
+    { new: true }
+  )
+  return result
 }
 
 export const userServcies = {
@@ -204,4 +241,5 @@ export const userServcies = {
   updatePasswordIntoDB,
   tokenValidation,
   forgotPassword,
+  resetPass,
 }

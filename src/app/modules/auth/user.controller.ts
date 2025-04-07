@@ -140,7 +140,18 @@ const forgotPass = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'forgot password   successfully',
+    message: 'reset link send to your  email ',
+  })
+})
+const resetPass = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body
+  const userId = req.params.userId
+  const result = await userServcies.resetPass(userId, payload)
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'reset password successfully ',
     data: result,
   })
 })
@@ -156,4 +167,5 @@ export const userControlloer = {
   validToken,
   logout,
   forgotPass,
+  resetPass,
 }
