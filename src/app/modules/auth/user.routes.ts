@@ -38,7 +38,11 @@ userRouter.post(
   zodValidator(authValidation.forgotPasswordValidation),
   userControlloer.forgotPass
 ) //auth('user')
-userRouter.patch('/reset-password/:userId', userControlloer.resetPass) //auth('user')
+userRouter.patch(
+  '/reset-password/:userId',
+  zodValidator(authValidation.resetPasswordValidation),
+  userControlloer.resetPass
+) //auth('user')
 
 // /api/admin/users/:userId/block
 

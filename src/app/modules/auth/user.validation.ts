@@ -34,9 +34,14 @@ const forgotPasswordValidation = z.object({
     .string({ invalid_type_error: 'email is required ' })
     .email('Invalid email address'),
 })
+const resetPasswordValidation = z.object({
+  password: z.string({ invalid_type_error: 'password is required' }),
+  token: z.string({ invalid_type_error: 'token is required' }),
+})
 
 export const authValidation = {
   userValidationSchema,
   loginUserVaidation,
+  resetPasswordValidation,
   forgotPasswordValidation,
 }
