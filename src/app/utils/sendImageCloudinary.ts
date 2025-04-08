@@ -110,3 +110,21 @@ const uploadToCloudinary = (
 }
 
 export { upload, uploadToCloudinary }
+
+//! ehtisiaum vai
+
+// export const upload = multer({
+//   storage: multer.diskStorage({}),
+//   fileFilter: (req, file, cb) => {
+//     const ext = path.extname(file.originalname)
+//     // if (ext === '.jpg' && ext == '.jpg' && ext == '.png' && ext == '.mp4') {
+//     //   cb(new Error('File type not supported'), false)
+//     //   return
+//     // }
+//     cb(null, true)
+//   },
+//   // limits: {
+//   //     fileSize: 2 * 1000000,
+//   // },
+// })
+// await cloudinary.uploader.upload(req.file.path)
