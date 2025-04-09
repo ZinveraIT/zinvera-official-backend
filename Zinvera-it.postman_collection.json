@@ -1,650 +1,645 @@
 {
-	"info": {
-		"_postman_id": "6f15b589-f822-43ab-8d6e-96da70423fb4",
-		"name": "Zinvera-it",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "39793006"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "create-user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\n    \"userName\" : \"roton\",\n    \"email\":\"roton@gmai.com\",\n    \"password\":\"roton\"\n\n}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/auth/register"
-					},
-					"response": []
-				},
-				{
-					"name": "valid Token",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uQGdtYWkuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDMzMzM3MTYsImV4cCI6MTc0MzMzNzMxNn0.-mvCfehMulE6LkKO1z_mE8Rk2E9PjVZPsv7qbAtu_3c\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/auth/validToken"
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"roton@gmai.com\",\r\n    \"password\": \"roton\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/auth/login"
-					},
-					"response": []
-				},
-				{
-					"name": "logout",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"roton@gmai.com\",\r\n    \"password\": \"roton\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "https://zinvera.vercel.app/api/auth/logout"
-					},
-					"response": []
-				},
-				{
-					"name": "get all users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI3MDUsImV4cCI6MTc0MjIyNjMwNX0.V_UF4BVLptgBoGrtErxWSTR7ZHOjVRp6JmFlRNtBSSY",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/admin/users"
-					},
-					"response": []
-				},
-				{
-					"name": "delet user",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI5MDMsImV4cCI6MTc0MjIyNjUwM30.Y4P4kPAUA6bTEcBaXb6f2_x9DXp9uxQbVQs6xttHqCQ",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/admin/users/67d8366f4d8c8a7f2406ba68"
-					},
-					"response": []
-				},
-				{
-					"name": "block user",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI5MDMsImV4cCI6MTc0MjIyNjUwM30.Y4P4kPAUA6bTEcBaXb6f2_x9DXp9uxQbVQs6xttHqCQ",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/admin/users/67d8366f4d8c8a7f2406ba68"
-					},
-					"response": []
-				},
-				{
-					"name": "update-user-info",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDFAZ21haS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MjIyNTQwMiwiZXhwIjoxNzQyMjI5MDAyfQ.IonCcVV5IwPNZ4N8CI5RSxjHA6Xo4BS2YPRGEogwGTg",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\n    \"userName\" : \"toton\",\n    \"location\":\"dhaka mirpur\",\n\"phone\":\"01890132323\",\n\"Position\" : \"mentor\",\n\"socialLinks\":[\"facebbok\", \"linkedin\"]\n}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/user/67dff3d85108eea65dbd486f"
-					},
-					"response": []
-				},
-				{
-					"name": "change-password",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDFAZ21haS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MjIyNTQwMiwiZXhwIjoxNzQyMjI5MDAyfQ.IonCcVV5IwPNZ4N8CI5RSxjHA6Xo4BS2YPRGEogwGTg",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"oldPassword\":\"roton1\",\r\n    \"newPassword\":\"roton\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/update-password/67e01ff010ce7f1c04d37171"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "portfolio",
-			"item": [
-				{
-					"name": "add-portfolio",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\n  \"title\": \"My Portfolio Item\",\n  \"description\": \"This is a description of the portfolio item.\",\n  \"keyFeatured\": [\"Feature 1\", \"Feature 2\"],\n  \"team\": [\n   \"67d725106e646f739adb4992\",\n\"67d724ed6e646f739adb498e\"\n  ],\n\"video\":\"asda\",\n\"category\" : \"67de8ec9784ee792a7ff6b07\",\n  \"techStack\": [\"React\", \"Node.js\", \"MongoDB\"],\n  \"tags\": [\"portfolio\", \"web development\", \"MERN stack\"]\n}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f0066eb-76f2-4890-aca3-18a6e00c33dc"
-								},
-								{
-									"key": "video",
-									"type": "file",
-									"src": "postman-cloud:///1f0066eb-76f2-4890-aca3-18a6e00c33dc",
-									"disabled": true
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/create-portfolio"
-					},
-					"response": []
-				},
-				{
-					"name": "delete-portfolio",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:5000/api/delete-portfolio/67b491df8d540eedfa3492ff"
-					},
-					"response": []
-				},
-				{
-					"name": "update-portfolio",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\n    \"title\" : \" leveevadsas\"\n}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/update-portfolio/67dfdfd749fe61ef6d7b8fcd"
-					},
-					"response": []
-				},
-				{
-					"name": "get-portfolio",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "searchTerm",
-								"value": "fghj",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:5000/api/portfolio",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"portfolio"
-							],
-							"query": [
-								{
-									"key": "searchTerm",
-									"value": "leveevadsas",
-									"disabled": true
-								},
-								{
-									"key": "page",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "6",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get-single-portfolio",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/get-portfolio/67b4a466c65e7d99fd72772b"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Jobs",
-			"item": [
-				{
-					"name": "add-jobs",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"Software Engineer\",\r\n  \"description\": \"We are looking for a talented MERN Stack Developer with expertise in React, Node.js, Express, and MongoDB.\",\r\n  \"category\":\"67de8ec9784ee792a7ff6b01\",\r\n  \"keyFeatured\": [\"Remote Work\", \"Flexible Hours\", \"Health Benefits\"],\r\n  \"experienceNeed\": [\"2+ years in MERN stack development\", \"Experience with REST APIs\"],\r\n  \"skills\": [\"React.js\", \"Node.js\", \"Express.js\", \"MongoDB\", \"JavaScript\", \"TypeScript\"],\r\n  \"companyName\": \"Tech Innovators Ltd.\",\r\n  \"location\": \"New York, USA\",\r\n  \"employmentType\": \"Full-time\",\r\n  \"salary\": 60000,\r\n  \"Vacancy\": 3,\r\n  \"Location\": \"Remote\",\r\n  \"isAvailable\": true,\r\n  \"submissionDate\": \"02-03-2025\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/job"
-					},
-					"response": []
-				},
-				{
-					"name": "Get-all-jobs",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/get-job"
-					},
-					"response": []
-				},
-				{
-					"name": "Get-single-jobs",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/get-job/67de8c7b9726971bb41c3e37"
-					},
-					"response": []
-				},
-				{
-					"name": "delete-jobs",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:5000/api/delete-job/67de7937e40b3a4f37083b4a"
-					},
-					"response": []
-				},
-				{
-					"name": "update-jobs",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"status\" : \"pending\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/update-job/67de7937e40b3a4f37083b4a"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "category",
-			"item": [
-				{
-					"name": "add -category",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"roton\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/category"
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/category"
-					},
-					"response": []
-				},
-				{
-					"name": "get=single",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"adkjaksd\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "service",
-			"item": [
-				{
-					"name": "add -service",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"roton\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/category"
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/service"
-					},
-					"response": []
-				},
-				{
-					"name": "get=single",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/service/67df887d1eebfa08d487f1b5"
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{\"isDeleted\":true}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7",
-									"disabled": true
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/service/67e21f69fc2a5ff3a46dd5ce"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Subsciption",
-			"item": [
-				{
-					"name": "add -subs",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"roton4@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:5000/api/subscription"
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/subscription"
-					},
-					"response": []
-				},
-				{
-					"name": "get=single",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:5000/api/subscription/67e23d56afb05f6dedf08d12"
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "http://localhost:5000/api/subscription/67e23d9d4917fa9cac8cacc4"
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "data",
-									"value": "{}",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
-								}
-							]
-						},
-						"url": "http://localhost:5000/api/subscription/67e23e0b4917fa9cac8cacc9"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "destroy image in cloudinary",
-			"item": [
-				{
-					"name": "destry-image",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"public_id\": \"images/lvbchkzoxrwdkq6guukm\",\r\n  \"api_key\": \"978815116795141\",\r\n  \"api_secret\": \"uYt5mUBz6Gy34T-_UWVz0TejESM\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "https://api.cloudinary.com/v1_1/dvlrdereh/image/destroy\n"
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "6f15b589-f822-43ab-8d6e-96da70423fb4",
+    "name": "Zinvera-it",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "39793006"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "create-user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{\n    \"userName\" : \"roton\",\n    \"email\":\"roton@gmai.com\",\n    \"password\":\"roton\"\n\n}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/auth/register"
+          },
+          "response": []
+        },
+        {
+          "name": "valid Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uQGdtYWkuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDMzMzM3MTYsImV4cCI6MTc0MzMzNzMxNn0.-mvCfehMulE6LkKO1z_mE8Rk2E9PjVZPsv7qbAtu_3c\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/auth/validToken"
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"roton@gmai.com\",\r\n    \"password\": \"roton\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/auth/login"
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"roton@gmai.com\",\r\n    \"password\": \"roton\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://zinvera.vercel.app/api/auth/logout"
+          },
+          "response": []
+        },
+        {
+          "name": "get all users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI3MDUsImV4cCI6MTc0MjIyNjMwNX0.V_UF4BVLptgBoGrtErxWSTR7ZHOjVRp6JmFlRNtBSSY",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/admin/users"
+          },
+          "response": []
+        },
+        {
+          "name": "delet user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI5MDMsImV4cCI6MTc0MjIyNjUwM30.Y4P4kPAUA6bTEcBaXb6f2_x9DXp9uxQbVQs6xttHqCQ",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/admin/users/67d8366f4d8c8a7f2406ba68"
+          },
+          "response": []
+        },
+        {
+          "name": "block user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDZAZ21haS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDIyMjI5MDMsImV4cCI6MTc0MjIyNjUwM30.Y4P4kPAUA6bTEcBaXb6f2_x9DXp9uxQbVQs6xttHqCQ",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/admin/users/67d8366f4d8c8a7f2406ba68"
+          },
+          "response": []
+        },
+        {
+          "name": "update-user-info",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDFAZ21haS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MjIyNTQwMiwiZXhwIjoxNzQyMjI5MDAyfQ.IonCcVV5IwPNZ4N8CI5RSxjHA6Xo4BS2YPRGEogwGTg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{\n    \"userName\" : \"toton\",\n    \"location\":\"dhaka mirpur\",\n\"phone\":\"01890132323\",\n\"Position\" : \"mentor\",\n\"socialLinks\":[\"facebbok\", \"linkedin\"]\n}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/user/67dff3d85108eea65dbd486f"
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvdG9uMDFAZ21haS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MjIyNTQwMiwiZXhwIjoxNzQyMjI5MDAyfQ.IonCcVV5IwPNZ4N8CI5RSxjHA6Xo4BS2YPRGEogwGTg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\":\"roton1\",\r\n    \"newPassword\":\"roton\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/update-password/67e01ff010ce7f1c04d37171"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "portfolio",
+      "item": [
+        {
+          "name": "add-portfolio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{\n  \"title\": \"My Portfolio Item\",\n  \"description\": \"This is a description of the portfolio item.\",\n  \"keyFeatured\": [\"Feature 1\", \"Feature 2\"],\n  \"team\": [\n   \"67d725106e646f739adb4992\",\n\"67d724ed6e646f739adb498e\"\n  ],\n\"video\":\"asda\",\n\"category\" : \"67de8ec9784ee792a7ff6b07\",\n  \"techStack\": [\"React\", \"Node.js\", \"MongoDB\"],\n  \"tags\": [\"portfolio\", \"web development\", \"MERN stack\"]\n}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f0066eb-76f2-4890-aca3-18a6e00c33dc"
+                },
+                {
+                  "key": "video",
+                  "type": "file",
+                  "src": "postman-cloud:///1f0066eb-76f2-4890-aca3-18a6e00c33dc",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/create-portfolio"
+          },
+          "response": []
+        },
+        {
+          "name": "delete-portfolio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/delete-portfolio/67b491df8d540eedfa3492ff"
+          },
+          "response": []
+        },
+        {
+          "name": "update-portfolio",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{\n    \"title\" : \" leveevadsas\"\n}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/update-portfolio/67dfdfd749fe61ef6d7b8fcd"
+          },
+          "response": []
+        },
+        {
+          "name": "get-portfolio",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "searchTerm",
+                "value": "fghj",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/portfolio",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "portfolio"],
+              "query": [
+                {
+                  "key": "searchTerm",
+                  "value": "leveevadsas",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "6",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-single-portfolio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/get-portfolio/67b4a466c65e7d99fd72772b"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "add-jobs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Software Engineer\",\r\n  \"description\": \"We are looking for a talented MERN Stack Developer with expertise in React, Node.js, Express, and MongoDB.\",\r\n  \"category\":\"67de8ec9784ee792a7ff6b01\",\r\n  \"keyFeatured\": [\"Remote Work\", \"Flexible Hours\", \"Health Benefits\"],\r\n  \"experienceNeed\": [\"2+ years in MERN stack development\", \"Experience with REST APIs\"],\r\n  \"skills\": [\"React.js\", \"Node.js\", \"Express.js\", \"MongoDB\", \"JavaScript\", \"TypeScript\"],\r\n  \"companyName\": \"Tech Innovators Ltd.\",\r\n  \"location\": \"New York, USA\",\r\n  \"employmentType\": \"Full-time\",\r\n  \"salary\": 60000,\r\n  \"Vacancy\": 3,\r\n  \"Location\": \"Remote\",\r\n  \"isAvailable\": true,\r\n  \"submissionDate\": \"02-03-2025\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/job"
+          },
+          "response": []
+        },
+        {
+          "name": "Get-all-jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/get-job"
+          },
+          "response": []
+        },
+        {
+          "name": "Get-single-jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/get-job/67de8c7b9726971bb41c3e37"
+          },
+          "response": []
+        },
+        {
+          "name": "delete-jobs",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/delete-job/67de7937e40b3a4f37083b4a"
+          },
+          "response": []
+        },
+        {
+          "name": "update-jobs",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"status\" : \"pending\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/update-job/67de7937e40b3a4f37083b4a"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "item": [
+        {
+          "name": "add -category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"roton\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/category"
+          },
+          "response": []
+        },
+        {
+          "name": "get all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/category"
+          },
+          "response": []
+        },
+        {
+          "name": "get=single",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"adkjaksd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "service",
+      "item": [
+        {
+          "name": "add -service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"roton\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/category"
+          },
+          "response": []
+        },
+        {
+          "name": "get all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/service"
+          },
+          "response": []
+        },
+        {
+          "name": "get=single",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/service/67df887d1eebfa08d487f1b5"
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/category/67de916113f2e55bc9006fc3"
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{\"isDeleted\":true}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/service/67e21f69fc2a5ff3a46dd5ce"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subsciption",
+      "item": [
+        {
+          "name": "add -subs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\" : \"roton4@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:5000/api/subscription"
+          },
+          "response": []
+        },
+        {
+          "name": "get all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/subscription"
+          },
+          "response": []
+        },
+        {
+          "name": "get=single",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/subscription/67e23d56afb05f6dedf08d12"
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/subscription/67e23d9d4917fa9cac8cacc4"
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "value": "{}",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "postman-cloud:///1f00662f-e7b4-4ae0-81ba-2c5271150ba7"
+                }
+              ]
+            },
+            "url": "http://localhost:5000/api/subscription/67e23e0b4917fa9cac8cacc9"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "destroy image in cloudinary",
+      "item": [
+        {
+          "name": "destry-image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"public_id\": \"images/lvbchkzoxrwdkq6guukm\",\r\n  \"api_key\": \"978815116795141\",\r\n  \"api_secret\": \"uYt5mUBz6Gy34T-_UWVz0TejESM\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://api.cloudinary.com/v1_1/dvlrdereh/image/destroy\n"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

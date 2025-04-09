@@ -39,7 +39,7 @@ const getSinglePortfolioIntroDB = async (id: string) => {
 const getAllPortfolioIntroDB = async (queryParams: Record<string, any>) => {
   const query = new QueryBuilder(
     PortfolioItem.find({ isDeleted: false }),
-    queryParams 
+    queryParams
   )
     .search(['title', 'description'])
     .paginate()
