@@ -29,17 +29,28 @@ userRouter.patch(
   auth('admin'),
   userControlloer.blockUser
 )
-userRouter.patch('/user/:userId', upload, userControlloer.updateuser) //auth('user')
+userRouter.patch(
+  '/user/:userId',
+  auth('user', 'admin'),
+  upload,
+  userControlloer.updateuser
+) //auth('user')
 userRouter.post('/validToken', userControlloer.validToken) //auth('user')
 userRouter.delete('/auth/logout', userControlloer.logout) //auth('user')
-userRouter.patch('/update-password/:userId', userControlloer.updatePass) //auth('user')
+userRouter.patch(
+  '/update-password/:userId',
+  auth('user', 'admin'),
+  userControlloer.updatePass
+) //auth('user')
 userRouter.post(
   '/forgot-password/',
   zodValidator(authValidation.forgotPasswordValidation),
+  auth('user', 'admin'),
   userControlloer.forgotPass
 ) //auth('user')
 userRouter.patch(
   '/reset-password/:userId',
+  auth('user', 'admin'),
   zodValidator(authValidation.resetPasswordValidation),
   userControlloer.resetPass
 ) //auth('user')
