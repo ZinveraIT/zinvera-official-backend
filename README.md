@@ -1,17 +1,17 @@
 # Zinvera IT Backend
 
-`Production URL -` = https://[zinvera](https://zinvera.vercel.app/api/).vercel.app/api/
+`Production URL -` = https://zinvera.vercel.app/api/
 
-# creadiantial
+# Credentials
 
-admin = test.admin@gmail.com
-user = test.user@gmail.com
+- Admin: test.admin@gmail.com
+- User: test.user@gmail.com
 
 # English Documentation
 
 ## Overview
 
-A comprehensive backend system for Zinvera IT Solutions, featuring user management, portfolio management, service listings, and job postings.
+A comprehensive backend system for Zinvera IT Solutions, featuring user management, portfolio management, service listings, job postings, and job applications.
 
 ## Technologies
 
@@ -21,6 +21,7 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - JWT Authentication
 - Cloudinary for Media Storage
 - Multer for File Handling
+- Nodemailer for Email Services
 
 ## Data Models
 
@@ -30,15 +31,16 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 {
   userName: string;
   email: string;
-  image: string;
+  image?: string;
   password: string;
-  role: "admin" | "user";
-  position: string;
-  phone: string;
-  location: string;
-  socialLinks: string[];
-  isBlocked: boolean;
-  isDeleted: boolean;
+  role?: 'user' | 'admin';
+  position?: string;
+  phone?: string;
+  location?: string;
+  jobType?: 'Full-time' | 'Part-time' | 'Internship';
+  socialLinks?: string[];
+  isBlocked?: boolean;
+  isDeleted?: boolean;
 }
 ```
 
@@ -51,11 +53,11 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
   video: string;
   description: string;
   keyFeatured: string[];
-  team: ObjectId[];
+  team: mongoose.Types.ObjectId[];
   techStack: string[];
   tags: string[];
-  category: ObjectId;
-  isDeleted: boolean;
+  category: mongoose.Types.ObjectId;
+  isDeleted?: boolean;
 }
 ```
 
@@ -64,17 +66,18 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 ```typescript
 {
   title: string;
-  category: ObjectId;
+  category: Schema.Types.ObjectId;
   description: string;
   keyFeatured: string[];
   experienceNeed: string[];
   skills: string[];
   companyName: string;
   location: string;
-  employmentType: "Full-time" | "Part-time" | "Internship";
+  employmentType: 'Full-time' | 'Part-time' | 'Internship';
   salary: number | string;
   Vacancy: number;
-  status: "pending" | "completed";
+  status?: 'pending' | 'completed';
+  isDeleted?: boolean;
   submissionDate: Date;
 }
 ```
@@ -84,24 +87,52 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 ```typescript
 {
   image: string;
-  title: ObjectId;
+  title: Schema.Types.ObjectId;
   description: string;
   keyFeatured: string[];
   benifits: string[];
-  isDeleted: boolean;
+  isDeleted?: boolean;
+}
+```
+
+### Application Model
+
+```typescript
+{
+  jobId: string
+  jobTitle: string
+  name: string
+  email: string
+  phone: string
+  salaryExpectation: string
+  githubUrl: string
+  linkedinUrl: string
+  portfolioUrl: string
+  resumeLink: string
+  location: string
+  yearsOfExperience: string
+  problemSolvingExperience: string
+  whyHireYou: string
+}
+```
+
+### Subscription Model
+
+```typescript
+{
+  email: string;
+  subscriptionType?: boolean;
 }
 ```
 
 ## API Endpoints
 
-### Token Validation - No need to send any data . they will give the token in your cookie
-
-- `POST /api/validToken` - validate the token
-
-- ### Authentication
+### Authentication
 
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - User login
+- `DELETE /api/auth/logout` - User logout
+- `POST /api/validToken` - Validate token
 
 ### User Management
 
@@ -110,8 +141,8 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - `PATCH /api/admin/users/:userId` - Block/Unblock user (Admin)
 - `PATCH /api/user/:userId` - Update user profile
 - `PATCH /api/update-password/:userId` - Update password
-- `POST /api/forgot-password` - forgot password  // Email 
-- `PATCH /api/reset-password/:userId` - reset password // userId , password , token
+- `POST /api/forgot-password` - Request password reset
+- `PATCH /api/reset-password/:userId` - Reset password with token
 
 ### Portfolio
 
@@ -129,6 +160,13 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - `PATCH /api/job/:id` - Update job (Admin)
 - `DELETE /api/job/:id` - Delete job (Admin)
 
+### Job Applications
+
+- `POST /api/application` - Submit job application
+- `GET /api/application` - Get all applications (Admin)
+- `GET /api/application/:id` - Get single application (Admin)
+- `DELETE /api/application/:id` - Delete application (Admin)
+
 ### Services
 
 - `POST /api/service` - Create service (Admin)
@@ -145,152 +183,81 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - `PUT /api/category/:id` - Update category (Admin)
 - `DELETE /api/category/:id` - Delete category (Admin)
 
+### Additional Content
+
+- `POST /api/additional` - Add additional content (Admin)
+- `GET /api/additional` - Get all additional content
+- `GET /api/additional/:id` - Get single additional content
+- `PUT /api/additional/:id` - Update additional content (Admin)
+- `DELETE /api/additional/:id` - Delete additional content (Admin)
+
 ### Subscription
 
 - `POST /api/subscription` - Request subscription
 - `GET /api/subscription` - Get all subscriptions (Admin)
+- `GET /api/subscription/:id` - Get single subscription (Admin)
 - `PATCH /api/subscription/:subscriptionId` - Update subscription status (Admin)
+- `DELETE /api/subscription/:subscriptionId` - Delete subscription (Admin)
 
-## Authentication & Authorization
+## Features
 
-- JWT-based authentication
+### Authentication & Authorization
+
+- JWT-based authentication with HTTP-only cookies
 - Role-based access control (Admin/User)
-- File upload with Cloudinary integration
+- Token validation and refresh mechanism
+- Password reset functionality with email
 
----
+### File Handling
 
-# বাংলা ডকুমেন্টেশন
+- Image upload support with Cloudinary
+- File type validation
+- Automatic cleanup of temporary files
 
-## পরিচিতি
+### Security
 
-জিনভেরা আইটি সলিউশন্সের জন্য একটি পূর্ণাঙ্গ ব্যাকএন্ড সিস্টেম, যার মধ্যে রয়েছে ইউজার ম্যানেজমেন্ট, পোর্টফোলিও ম্যানেজমেন্ট, সার্ভিস লিস্টিং এবং জব পোস্টিং।
+- Password hashing with bcrypt
+- Protected routes with middleware
+- CORS configuration
+- Input validation with Zod
 
-## প্রযুক্তি
+### Error Handling
 
-- টাইপস্ক্রিপ্ট
-- নোড.জেএস এবং এক্সপ্রেস.জেএস
-- মঙ্গোডিবি এবং মঙ্গুস
-- জেডব্লিউটি অথেনটিকেশন
-- ক্লাউডিনারি মিডিয়া স্টোরেজ
-- মাল্টার ফাইল হ্যান্ডলিং
+- Global error handler
+- Custom error classes
+- Validation error handling
+- MongoDB error handling
 
-## ডাটা মডেল
+### Query Features
 
-### ইউজার মডেল
+- Search functionality
+- Pagination
+- Filtering
+- Field selection
+- Sorting
 
-```typescript
-{
-  userName: string; // ইউজারনেম
-  email: string; // ইমেইল
-  image: string; // ছবি
-  password: string; // পাসওয়ার্ড
-  role: "admin" | "user"; // রোল
-  position: string; // পজিশন
-  phone: string; // ফোন
-  location: string; // লোকেশন
-  socialLinks: string[]; // সোশ্যাল লিংক
-  isBlocked: boolean; // ব্লক স্টেটাস
-  isDeleted: boolean; // ডিলিট স্টেটাস
-}
-```
+## Setup & Installation
 
-### পোর্টফোলিও মডেল
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Create `.env` file with required environment variables:
+   ```env
+   DATABASE_URL=
+   PORT=
+   NODE_ENV=
+   BCRYPT_SALT=
+   JWT_SECRET=
+   CLOUD_NAME=
+   CLOUDINARY_API_KEY=
+   CLOUDINARY_API_SECRET=
+   ```
+4. Run development server: `npm run dev`
+5. Build for production: `npm run build`
 
-```typescript
-{
-  title: string;
-  image: string;
-  video: string;
-  description: string;
-  keyFeatured: string[];
-  team: ObjectId[];
-  techStack: string[];
-  tags: string[];
-  category: ObjectId;
-  isDeleted: boolean;
-}
-```
+## Available Scripts
 
-### জব মডেল
-
-```typescript
-{
-  title: string;
-  category: ObjectId;
-  description: string;
-  keyFeatured: string[];
-  experienceNeed: string[];
-  skills: string[];
-  companyName: string;
-  location: string;
-  employmentType: "Full-time" | "Part-time" | "Internship";
-  salary: number | string;
-  Vacancy: number;
-  status: "pending" | "completed";
-  submissionDate: Date;
-}
-```
-
-### সার্ভিস মডেল
-
-```typescript
-{
-  image: string;
-  title: ObjectId;
-  description: string;
-  keyFeatured: string[];
-  benifits: string[];
-  isDeleted: boolean;
-}
-```
-
-## এপিআই এন্ডপয়েন্ট
-
-### অথেনটিকেশন
-
-- `POST /api/auth/register` - নতুন ইউজার রেজিস্টার
-- `POST /api/auth/login` - ইউজার লগইন
-
-### ইউজার ম্যানেজমেন্ট
-
-- `GET /api/admin/users` - সকল ইউজার দেখুন (এডমিন)
-- `DELETE /api/admin/users/:userId` - ইউজার ডিলিট (এডমিন)
-- `PATCH /api/admin/users/:userId` - ইউজার ব্লক/আনব্লক (এডমিন)
-- `PATCH /api/user/:userId` - ইউজার প্রোফাইল আপডেট
-- `PATCH /api/update-password/:userId` - পাসওয়ার্ড আপডেট
-
-### পোর্টফোলিও
-
-- `POST /api/create-portfolio` - পোর্টফোলিও তৈরি (এডমিন)
-- `GET /api/get-portfolio` - সকল পোর্টফোলিও দেখুন
-- `GET /api/get-portfolio/:id` - একক পোর্টফোলিও দেখুন
-- `PATCH /api/update-portfolio/:id` - পোর্টফোলিও আপডেট (এডমিন)
-- `DELETE /api/delete-portfolio/:id` - পোর্টফোলিও ডিলিট (এডমিন)
-
-### জব
-
-- `POST /api/create-Job` - জব পোস্ট তৈরি (এডমিন)
-- `GET /api/get-Job` - সকল জব দেখুন
-- `GET /api/get-Job/:id` - একক জব দেখুন
-- `PATCH /api/update-Job/:id` - জব আপডেট (এডমিন)
-- `DELETE /api/delete-Job/:id` - জব ডিলিট (এডমিন)
-
-### সার্ভিস
-
-- `POST /api/service` - সার্ভিস তৈরি (এডমিন)
-- `GET /api/service` - সকল সার্ভিস দেখুন
-- `GET /api/service/:id` - একক সার্ভিস দেখুন
-- `PUT /api/service/:id` - সার্ভিস আপডেট (এডমিন)
-- `DELETE /api/service/:id` - সার্ভিস ডিলিট (এডমিন)
-
-### ক্যাটাগরি
-
-- `POST /api/category` - ক্যাটাগরি তৈরি (এডমিন)
-- `GET /api/category` - সকল ক্যাটাগরি দেখুন
-- `GET /api/category/:id` - একক ক্যাটাগরি দেখুন
-- `PUT /api/category/:id` - ক্যাটাগরি আপডেট (এডমিন)
-- `DELETE /api/category/:id` - ক্যাটাগরি ডিলিট (এডমিন)
-
-### সাবস্ক্রিপশন
-
-- `POST /api/subscription` - সাবস্ক্রিপশন রিকুয়েস্ট
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
+- `npm run format` - Format code with Prettier

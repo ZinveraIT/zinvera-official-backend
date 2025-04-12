@@ -6,6 +6,7 @@ import { categoryRouter } from '../modules/Categories/categories.router'
 import serviceRouter from '../modules/service/service.routes'
 import additionalRouter from '../modules/additional/additional.routes'
 import SubscriptionRouter from '../modules/subscription/subscription.routes'
+import applicationRouter from '../modules/applications/applications.routes'
 
 const router = Router()
 
@@ -37,6 +38,10 @@ const routers = [
   {
     path: '/subscription',
     router: SubscriptionRouter,
+  },
+  {
+    path: '/application',
+    router: applicationRouter,
   },
 ]
 
