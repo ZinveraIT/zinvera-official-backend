@@ -170,6 +170,7 @@ const tokenValidation = (token: string) => {
 }
 const forgotPassword = async (payload: { email: string }) => {
   const User = await user.findOne({ email: payload.email })
+
   if (!User) {
     throw new AppError(404, 'User not found')
   }
@@ -179,21 +180,40 @@ const forgotPassword = async (payload: { email: string }) => {
   if (User.isDeleted) {
     throw new AppError(404, 'User is deleted')
   }
+
   const jwtPayload = {
     email: User.email,
     userName: User.userName,
     _id: User._id,
     role: User.role,
   }
+
   const token = jwt.sign(jwtPayload, config.JWT_SECRET as string, {
     expiresIn: '1h',
   })
+
   const resetLink = `http://localhost:3000/resetPassword/?id=${User._id}&token=${token}`
 
-  await sendMail(User.email, resetLink)
-  return {}
+  const html = `
+    <div>
+      <h2>Password Reset Request</h2>
+      <p>Hello ${User.userName},</p>
+      <p>You requested a password reset. Click the link below to reset your password:</p>
+      <a href="${resetLink}">${resetLink}</a>
+      <p>This link will expire in 1 hour.</p>
+    </div>
+  `
 
-  // console.log(token, resetLink)
+  const text = `Hello ${User.userName},\nReset your password using this link: ${resetLink}\nThis link will expire in 1 hour.`
+
+  await sendMail(
+    User.email, // to
+    'zinverait@gmail.com', // from (Gmail account)
+    'Reset your password - Zinvera IT', // subject                       // plain text version
+    html // html body
+  )
+
+  return {}
 }
 
 const resetPass = async (
@@ -231,6 +251,25 @@ const resetPass = async (
   return result
 }
 
+const sendEmail = async (payload: any) => {
+  const html = `
+    <h3>New Contact Message</h3>
+    <p><strong>Name:</strong> ${payload.name}</p>
+    <p><strong>subject:</strong> ${payload.subject}</p>
+    <p><strong>Email:</strong> ${payload.email}</p>
+    <p><strong>Message:</strong> ${payload.html}</p>
+  `
+
+  await sendMail(
+    'zinverait@gmail.com',
+    payload.email, // This is the user's email, used in replyTo
+    payload.subject,
+    html
+  )
+
+  return {}
+}
+
 export const userServcies = {
   createUserIntroDB,
   loginUserIntroDB,
@@ -242,4 +281,5 @@ export const userServcies = {
   tokenValidation,
   forgotPassword,
   resetPass,
+  sendEmail,
 }

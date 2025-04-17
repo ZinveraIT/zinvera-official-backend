@@ -155,6 +155,17 @@ const resetPass = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+const sendEmail = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body
+  const result = await userServcies.sendEmail(payload)
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'email sending successfully ',
+    data: result,
+  })
+})
 
 export const userControlloer = {
   createUser,
@@ -168,4 +179,5 @@ export const userControlloer = {
   logout,
   forgotPass,
   resetPass,
+  sendEmail,
 }

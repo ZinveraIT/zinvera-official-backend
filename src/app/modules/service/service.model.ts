@@ -23,6 +23,10 @@ const serviceschema = new Schema<IService>(
       type: [String],
       required: true,
     },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
     isDeleted: {
       type: Boolean,
       default: false,

@@ -6,5 +6,6 @@ export interface IService {
   description: string
   keyFeatured: string[]
   benifits: string[]
+  isActive?: boolean
   isDeleted?: boolean
 }

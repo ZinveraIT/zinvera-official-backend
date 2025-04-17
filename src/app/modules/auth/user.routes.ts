@@ -43,9 +43,8 @@ userRouter.patch(
   userControlloer.updatePass
 ) //auth('user')
 userRouter.post(
-  '/forgot-password/',
+  '/forgot-password',
   zodValidator(authValidation.forgotPasswordValidation),
-  auth('user', 'admin'),
   userControlloer.forgotPass
 ) //auth('user')
 userRouter.patch(
@@ -54,6 +53,12 @@ userRouter.patch(
   zodValidator(authValidation.resetPasswordValidation),
   userControlloer.resetPass
 ) //auth('user')
+
+userRouter.post(
+  '/sendEmail',
+  zodValidator(authValidation.emailSendingValidation),
+  userControlloer.sendEmail
+)
 
 // /api/admin/users/:userId/block
 

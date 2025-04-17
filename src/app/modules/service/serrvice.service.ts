@@ -32,16 +32,24 @@ const updateServiceInDB = async (id: string, updateData: Partial<IService>) => {
 }
 
 const deleteServiceFromDB = async (id: string) => {
-  const result = await service.findByIdAndUpdate(
-    id,
-    {
-      isDeleted: true,
-    },
-    { new: true, runValidators: true }
-  )
-  if (!result) {
+  const data = await service.findById(id)
+  if (!data) {
     throw new Error('Service not found or delete failed')
   }
+  const result = await service.findByIdAndUpdate(id, {
+    isDeleted: !data.isDeleted,
+  })
+  return result
+}
+
+const updateStatusFromDB = async (id: string) => {
+  const data = await service.findById(id)
+  if (!data) {
+    throw new Error('Service not found or update failed')
+  }
+  const result = await service.findByIdAndUpdate(id, {
+    isActive: !data.isActive,
+  })
   return result
 }
 
@@ -51,4 +59,5 @@ export const serviceServices = {
   getServiceByIdFromDB,
   updateServiceInDB,
   deleteServiceFromDB,
+  updateStatusFromDB,
 }

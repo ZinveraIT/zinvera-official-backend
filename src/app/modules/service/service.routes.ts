@@ -23,5 +23,6 @@ serviceRouter.put(
   serviceController.updateService
 )
 serviceRouter.delete('/:id', auth('admin'), serviceController.deleteService)
+serviceRouter.patch('/:id', auth('admin'), serviceController.updateStatus)
 
 export default serviceRouter
