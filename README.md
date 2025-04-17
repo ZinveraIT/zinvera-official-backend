@@ -174,6 +174,7 @@ A comprehensive backend system for Zinvera IT Solutions, featuring user manageme
 - `GET /api/service/:id` - Get single service
 - `PUT /api/service/:id` - Update service (Admin)
 - `DELETE /api/service/:id` - Delete service (Admin)
+- `patch /api/service/:id` - updateStatus service (Admin)
 
 ### Categories
 
